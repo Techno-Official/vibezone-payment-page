@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vibezone Payment</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+  <h3>Processing your payment...</h3>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const order_id = urlParams.get('order_id');
+    const amount = urlParams.get('amount');
+    const key = urlParams.get('key');
+
+    if (!order_id || !amount || !key) {
+      document.body.innerHTML = "<p>Missing payment parameters.</p>";
+      throw new Error("Missing payment parameters");
+    }
+
+    const options = {
+      "key": key,
+      "amount": amount,
+      "currency": "INR",
+      "name": "Vibezone",
+      "description": "Coin Purchase",
+      "order_id": order_id,
+      "handler": function (response) {
+        window.location.href = "https://vibezone-backend.fly.dev/confirm-web-payment?" +
+          "payment_id=" + response.razorpay_payment_id +
+          "&order_id=" + response.razorpay_order_id +
+          "&signature=" + response.razorpay_signature;
+      },
+      "theme": {
+        "color": "#FF9900"
+      }
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
+  </script>
+</body>
+</html>
