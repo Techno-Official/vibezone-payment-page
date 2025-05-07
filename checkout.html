@@ -26,15 +26,20 @@
       "description": "Coin Purchase",
       "order_id": order_id,
       "handler": function (response) {
-        window.location.href = "https://vibezone-backend.fly.dev/confirm-web-payment?" +
+        // Construct the URL to redirect to Flutter app with the payment details
+        const paymentUrl = "myapp://payment-success?" +
           "payment_id=" + response.razorpay_payment_id +
           "&order_id=" + response.razorpay_order_id +
           "&signature=" + response.razorpay_signature;
+
+        // Redirect to the Flutter app using the custom scheme
+        window.location.href = paymentUrl;
       },
       "theme": {
         "color": "#FF9900"
       }
     };
+
     const rzp = new Razorpay(options);
     rzp.open();
   </script>
