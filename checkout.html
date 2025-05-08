@@ -30,7 +30,8 @@
         const paymentUrl = "myapp://payment-success?" +
           "payment_id=" + response.razorpay_payment_id +
           "&order_id=" + response.razorpay_order_id +
-          "&signature=" + response.razorpay_signature;
+          "&signature=" + response.razorpay_signature +
+          "&amount=" + amount;
 
         // Redirect to the Flutter app using the custom scheme
         window.location.href = paymentUrl;
