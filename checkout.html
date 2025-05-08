@@ -12,8 +12,9 @@
     const order_id = urlParams.get('order_id');
     const amount = urlParams.get('amount');
     const key = urlParams.get('key');
+    const username = urlParams.get('username'); // ✅ NEW
 
-    if (!order_id || !amount || !key) {
+    if (!order_id || !amount || !key || !username) {
       document.body.innerHTML = "<p>Missing payment parameters.</p>";
       throw new Error("Missing payment parameters");
     }
@@ -31,7 +32,8 @@
           "payment_id=" + response.razorpay_payment_id +
           "&order_id=" + response.razorpay_order_id +
           "&signature=" + response.razorpay_signature +
-          "&amount=" + amount;
+          "&amount=" + amount +
+          "&username=" + username; // ✅ INCLUDE USERNAME
 
         // Redirect to the Flutter app using the custom scheme
         window.location.href = paymentUrl;
