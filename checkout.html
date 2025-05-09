@@ -8,41 +8,40 @@
 <body>
   <h3>Processing your payment...</h3>
   <script>
+    // Extract URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const order_id = urlParams.get('order_id');
     const amount = urlParams.get('amount');
     const key = urlParams.get('key');
-    const username = urlParams.get('username'); // ✅ NEW
+    const username = urlParams.get('username');
 
+    // Handle missing parameters
     if (!order_id || !amount || !key || !username) {
-      document.body.innerHTML = "<p>Missing payment parameters.</p>";
+      document.body.innerHTML = "<p>❌ Missing payment parameters.</p>";
       throw new Error("Missing payment parameters");
     }
 
+    // Razorpay options
     const options = {
-      "key": key,
-      "amount": amount,
-      "currency": "INR",
-      "name": "Vibezone",
-      "description": "Coin Purchase",
-      "order_id": order_id,
-      "handler": function (response) {
-        // Construct the URL to redirect to Flutter app with the payment details
-        const paymentUrl = "myapp://payment-success?" +
-          "payment_id=" + response.razorpay_payment_id +
-          "&order_id=" + response.razorpay_order_id +
-          "&signature=" + response.razorpay_signature +
-          "&amount=" + amount +
-          "&username=" + username; // ✅ INCLUDE USERNAME
-
-        // Redirect to the Flutter app using the custom scheme
+      key: key,
+      amount: amount,
+      currency: "INR",
+      name: "Vibezone",
+      description: "Coin Purchase",
+      order_id: order_id,
+      handler: function (response) {
+        // Construct Flutter deep link
+        const paymentUrl = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
+        
+        // Redirect to Flutter app
         window.location.href = paymentUrl;
       },
-      "theme": {
-        "color": "#FF9900"
+      theme: {
+        color: "#FF9900"
       }
     };
 
+    // Open Razorpay checkout
     const rzp = new Razorpay(options);
     rzp.open();
   </script>
