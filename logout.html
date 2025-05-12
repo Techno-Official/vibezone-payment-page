@@ -48,6 +48,8 @@
     <script>
         async function logout() {
             const token = localStorage.getItem('auth_token');
+            console.log("Token in localStorage:", token);  // 🐞 Debug: log the token
+
             if (!token) {
                 document.getElementById('logoutMessage').textContent = 'You are not logged in.';
                 return;
@@ -62,7 +64,10 @@
                     }
                 });
 
+                console.log("Logout response status:", res.status);  // 🐞 Debug: log status code
+
                 const data = await res.json();
+                console.log("Logout response body:", data);  // 🐞 Debug: log response
 
                 if (res.ok) {
                     localStorage.clear();
@@ -74,6 +79,7 @@
                     document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
                 }
             } catch (err) {
+                console.error("Logout error:", err);  // 🐞 Debug: log any fetch errors
                 document.getElementById('logoutMessage').textContent = 'Error: ' + err.message;
             }
         }
