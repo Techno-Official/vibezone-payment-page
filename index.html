@@ -25,6 +25,7 @@
             color: white;
             text-decoration: none;
             border-radius: 6px;
+            cursor: pointer;
         }
 
         .btn:hover {
@@ -46,13 +47,31 @@
     <h1>Welcome to Vibezone</h1>
     <p>Buy coins to enjoy premium one-to-one audio calls!</p>
 
-    <a href="login.html" class="btn">Login</a>
-    <a href="signup.html" class="btn">Sign Up</a>
-    <button class="btn" onclick="logout()">Logout</button>
+    <div id="authButtons">
+        <!-- Login/Signup or Logout will be injected here -->
+    </div>
 
     <div class="message" id="logoutMessage"></div>
 
     <script>
+        function renderButtons() {
+            const token = localStorage.getItem('auth_token');
+            const username = localStorage.getItem('username');
+            const authButtons = document.getElementById('authButtons');
+
+            if (token) {
+                authButtons.innerHTML = `
+                    <p>Hi, ${username || 'User'}!</p>
+                    <button class="btn" onclick="logout()">Logout</button>
+                `;
+            } else {
+                authButtons.innerHTML = `
+                    <a href="login.html" class="btn">Login</a>
+                    <a href="signup.html" class="btn">Sign Up</a>
+                `;
+            }
+        }
+
         async function logout() {
             const token = localStorage.getItem('auth_token');
             if (!token) {
@@ -73,9 +92,7 @@
                 if (response.ok) {
                     localStorage.clear();
                     document.getElementById('logoutMessage').textContent = 'Logged out successfully!';
-                    setTimeout(() => {
-                        window.location.reload(); // Refresh the page or redirect if needed
-                    }, 1500);
+                    renderButtons(); // Re-render buttons after logout
                 } else {
                     document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
                     document.getElementById('logoutMessage').className = 'error';
@@ -85,6 +102,9 @@
                 document.getElementById('logoutMessage').className = 'error';
             }
         }
+
+        // Initial render
+        renderButtons();
     </script>
 </body>
 
