@@ -30,14 +30,63 @@
         .btn:hover {
             background-color: #e88e00;
         }
+
+        #logoutBtn {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #cc0000;
+        }
+
+        #logoutBtn:hover {
+            background-color: #a30000;
+        }
     </style>
 </head>
 
 <body>
     <h1>Welcome to Vibezone</h1>
     <p>Buy coins to enjoy premium one-to-one audio calls!</p>
-    <a href="login.html" class="btn">Login</a>
-    <a href="signup.html" class="btn">Sign Up</a>
+
+    <a href="login.html" class="btn" id="loginBtn">Login</a>
+    <a href="signup.html" class="btn" id="signupBtn">Sign Up</a>
+    <button id="logoutBtn" class="btn" onclick="logout()">Logout</button>
+
+    <script>
+        // Show/hide buttons based on login state
+        const token = localStorage.getItem('auth_token');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+
+        if (token) {
+            logoutBtn.style.display = 'inline-block';
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+        }
+
+        async function logout() {
+            try {
+                const res = await fetch('https://vibezone-backend.fly.dev/api/logout/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Token ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (res.ok) {
+                    localStorage.clear();
+                    window.location.href = '/login.html';
+                } else {
+                    alert("Logout failed.");
+                }
+            } catch (err) {
+                alert("Network error during logout: " + err.message);
+            }
+        }
+    </script>
 </body>
 
 </html>

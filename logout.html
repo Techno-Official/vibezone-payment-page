@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Logout - Vibezone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .message {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Are you sure you want to logout?</h2>
+    <button onclick="logout()">Logout</button>
+
+    <div class="message" id="logoutMessage"></div>
+
+    <script>
+        async function logout() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                document.getElementById('logoutMessage').textContent = 'Not logged in.';
+                return;
+            }
+
+            try {
+                const res = await fetch('https://vibezone-backend.fly.dev/api/logout/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Token ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    // Clear storage and notify
+                    localStorage.clear();
+                    document.getElementById('logoutMessage').textContent = 'Logged out successfully.';
+                } else {
+                    document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
+                }
+            } catch (err) {
+                document.getElementById('logoutMessage').textContent = 'Error: ' + err.message;
+            }
+        }
+    </script>
+
+</body>
+
+</html>
