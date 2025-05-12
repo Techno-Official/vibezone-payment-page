@@ -67,9 +67,14 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    messageDiv.textContent = 'Signup successful! Token: ' + data.token;
+                    messageDiv.textContent = 'Signup successful! Redirecting...';
                     messageDiv.className = 'success';
-                    localStorage.setItem('auth_token', data.token); // Save for later use
+                    localStorage.setItem('auth_token', data.token); // Save token
+
+                    // ✅ Redirect to index.html after a short delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
                 } else {
                     messageDiv.textContent = data.message || 'Signup failed.';
                     messageDiv.className = 'error';
