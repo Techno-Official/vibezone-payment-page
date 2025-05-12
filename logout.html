@@ -9,15 +9,31 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 100px;
+            background-color: #f8f8f8;
+        }
+
+        h2 {
+            color: #FF9900;
         }
 
         button {
             padding: 10px 20px;
             font-size: 16px;
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e88e00;
         }
 
         .message {
             margin-top: 20px;
+            font-size: 16px;
+            color: #555;
         }
     </style>
 </head>
@@ -33,7 +49,7 @@
         async function logout() {
             const token = localStorage.getItem('auth_token');
             if (!token) {
-                document.getElementById('logoutMessage').textContent = 'Not logged in.';
+                document.getElementById('logoutMessage').textContent = 'You are not logged in.';
                 return;
             }
 
@@ -49,9 +65,11 @@
                 const data = await res.json();
 
                 if (res.ok) {
-                    // Clear storage and notify
                     localStorage.clear();
                     document.getElementById('logoutMessage').textContent = 'Logged out successfully.';
+                    setTimeout(() => {
+                        window.location.href = 'login.html'; // Redirect after 2 seconds
+                    }, 2000);
                 } else {
                     document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
                 }
