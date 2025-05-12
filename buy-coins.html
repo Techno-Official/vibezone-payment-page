@@ -1,38 +1,128 @@
-
 <!DOCTYPE html>
-<html>
-<head><title>Buy Coins</title></head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buy Coins - Vibezone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #fff8f0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ff6600;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .coin-box {
+            background: #ffe0b3;
+            border: 2px solid #ffa31a;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .coin-box:hover {
+            transform: scale(1.05);
+        }
+
+        .coin-amount {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 16px;
+        }
+
+        #status {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+    <script src="auth.js"></script> <!-- assumes you already have login token storage -->
+</head>
+
 <body>
-  <h2>Buy Coins</h2>
-  <form onsubmit="handleBuy(event)">
-    <label>Amount (INR):</label>
-    <select id="amount">
-      <option value="1000">10 coins - ₹10</option>
-      <option value="5000">50 coins - ₹50</option>
-      <option value="10000">100 coins - ₹100</option>
-    </select><br>
-    <button type="submit">Proceed to Pay</button>
-  </form>
+    <h2>Buy Coins</h2>
+    <div class="grid" id="coinGrid"></div>
+    <div id="status"></div>
 
-  <script src="js/user.js"></script>
-  <script src="js/api.js"></script>
-  <script>
-    checkAuth();
+    <script>
+        const websitePrices = [
+            { coins: 100, price: 100 },
+            { coins: 200, price: 200 },
+            { coins: 300, price: 300 },
+            { coins: 400, price: 400 },
+        ];
 
-    async function handleBuy(e) {
-      e.preventDefault();
-      const amount = document.getElementById("amount").value;
-      const username = getUsername();
+        const grid = document.getElementById("coinGrid");
+        const status = document.getElementById("status");
 
-      const res = await fetchWithAuth("https://your-backend.com/api/create-order/", {
-        method: 'POST',
-        body: JSON.stringify({ amount })
-      });
-      const data = await res.json();
+        websitePrices.forEach((item) => {
+            const box = document.createElement("div");
+            box.className = "coin-box";
+            box.innerHTML = `
+        <div class="coin-amount">${item.coins} Coins</div>
+        <div class="price">₹${item.price}</div>
+      `;
+            box.onclick = () => startPayment(item.price);
+            grid.appendChild(box);
+        });
 
-      const checkoutUrl = `checkout.html?order_id=${data.order_id}&amount=${data.amount}&key=${data.key}&username=${username}`;
-      window.location.href = checkoutUrl;
-    }
-  </script>
+        async function startPayment(amount) {
+            status.innerText = "⏳ Creating Razorpay order...";
+            const username = localStorage.getItem("username");
+
+            if (!username) {
+                status.innerText = "❌ User not logged in.";
+                return;
+            }
+
+            try {
+                const response = await fetch("https://vibezone-backend.fly.dev/create-order/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ amount }),
+                });
+
+                if (!response.ok) {
+                    status.innerText = "❌ Failed to create Razorpay order.";
+                    return;
+                }
+
+                const data = await response.json();
+                const orderId = data.id;
+                const key = data.key;
+
+                if (!key || !orderId) {
+                    status.innerText = "❌ Razorpay key or order ID missing.";
+                    return;
+                }
+
+                const checkoutUrl = `checkout.html?order_id=${orderId}&amount=${amount}&key=${key}&username=${encodeURIComponent(username)}`;
+                status.innerText = "✅ Redirecting to payment page...";
+                window.location.href = checkoutUrl;
+            } catch (e) {
+                status.innerText = "❌ Error starting payment.";
+                console.error(e);
+            }
+        }
+    </script>
 </body>
+
 </html>
