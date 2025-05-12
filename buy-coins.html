@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html>
+<head><title>Buy Coins</title></head>
+<body>
+  <h2>Buy Coins</h2>
+  <form onsubmit="handleBuy(event)">
+    <label>Amount (INR):</label>
+    <select id="amount">
+      <option value="1000">10 coins - ₹10</option>
+      <option value="5000">50 coins - ₹50</option>
+      <option value="10000">100 coins - ₹100</option>
+    </select><br>
+    <button type="submit">Proceed to Pay</button>
+  </form>
+
+  <script src="js/user.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    checkAuth();
+
+    async function handleBuy(e) {
+      e.preventDefault();
+      const amount = document.getElementById("amount").value;
+      const username = getUsername();
+
+      const res = await fetchWithAuth("https://your-backend.com/api/create-order/", {
+        method: 'POST',
+        body: JSON.stringify({ amount })
+      });
+      const data = await res.json();
+
+      const checkoutUrl = `checkout.html?order_id=${data.order_id}&amount=${data.amount}&key=${data.key}&username=${username}`;
+      window.location.href = checkoutUrl;
+    }
+  </script>
+</body>
+</html>
