@@ -17,8 +17,7 @@
         const usernameFromURL = params.get("username");
         if (usernameFromURL) {
             localStorage.setItem("username", usernameFromURL);
-            // Clean up URL (optional, for cleaner UX)
-            window.history.replaceState({}, document.title, window.location.pathname);
+            window.history.replaceState({}, document.title, window.location.pathname); // clean URL
         }
     </script>
 
@@ -30,10 +29,14 @@
         checkAuth();
         document.getElementById('user').innerText = getUsername();
 
-        fetchWithAuth("https://your-backend.com/api/wallet/")
+        fetchWithAuth("https://vibezone-backend.fly.dev/api/get-wallet-balance/")
             .then(res => res.json())
             .then(data => {
-                document.getElementById('wallet').innerText = data.balance;
+                if (data.success && data.data && typeof data.data.balance !== "undefined") {
+                    document.getElementById('wallet').innerText = data.data.balance;
+                } else {
+                    document.getElementById('wallet').innerText = "Error loading balance";
+                }
             })
             .catch(() => {
                 document.getElementById('wallet').innerText = "Error loading balance";
