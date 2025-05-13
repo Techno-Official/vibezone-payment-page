@@ -1,25 +1,44 @@
-
 <!DOCTYPE html>
 <html>
-<head><title>Dashboard</title></head>
+
+<head>
+    <title>Dashboard</title>
+</head>
+
 <body>
-  <h2>Welcome, <span id="user"></span></h2>
-  <p>Wallet Balance: <span id="wallet">...</span> coins</p>
-  <button onclick="location.href='buy-coins.html'">Buy Coins</button>
-  <button onclick="logoutUser()">Logout</button>
+    <h2>Welcome, <span id="user"></span></h2>
+    <p>Wallet Balance: <span id="wallet">...</span> coins</p>
+    <button onclick="location.href='buy-coins.html'">Buy Coins</button>
+    <button onclick="logoutUser()">Logout</button>
 
-  <script src="js/user.js"></script>
-  <script src="js/api.js"></script>
-  <script src="js/auth.js"></script>
-  <script>
-    checkAuth();
-    document.getElementById('user').innerText = getUsername();
+    <script>
+        // Restore username from URL if needed
+        const params = new URLSearchParams(window.location.search);
+        const usernameFromURL = params.get("username");
+        if (usernameFromURL) {
+            localStorage.setItem("username", usernameFromURL);
+            // Clean up URL (optional, for cleaner UX)
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
 
-    fetchWithAuth("https://your-backend.com/api/wallet/")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('wallet').innerText = data.balance;
-      });
-  </script>
+    <script src="js/user.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+
+    <script>
+        checkAuth();
+        document.getElementById('user').innerText = getUsername();
+
+        fetchWithAuth("https://your-backend.com/api/wallet/")
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('wallet').innerText = data.balance;
+            })
+            .catch(() => {
+                document.getElementById('wallet').innerText = "Error loading balance";
+            });
+    </script>
 </body>
+
 </html>
