@@ -45,9 +45,34 @@
             description: "Coin Purchase",
             order_id: order_id,
             handler: function (response) {
-                const redirectURL = `https://techno-official.github.io/vibezone-payment-page/dashboard.html?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
-                document.getElementById('status').innerText = "✅ Payment successful. Redirecting to dashboard...";
-                window.location.href = redirectURL;
+                document.getElementById('status').innerText = "✅ Payment successful. Confirming with server...";
+
+                fetch("https://vibezone-backend.fly.dev/confirm-payment/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        payment_id: response.razorpay_payment_id,
+                        order_id: response.razorpay_order_id,
+                        signature: response.razorpay_signature,
+                        amount: amount,
+                        username: username
+                    })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.error) {
+                            document.getElementById('status').innerText = "❌ Server error: " + data.error;
+                        } else {
+                            document.getElementById('status').innerText = "✅ Coins added! Redirecting to dashboard...";
+                            window.location.href = `dashboard.html?username=${username}`;
+                        }
+                    })
+                    .catch(err => {
+                        document.getElementById('status').innerText = "❌ Failed to confirm payment.";
+                        console.error(err);
+                    });
             },
             modal: {
                 ondismiss: function () {

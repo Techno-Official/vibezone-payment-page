@@ -27,20 +27,26 @@
 
     <script>
         checkAuth();
-        document.getElementById('user').innerText = getUsername();
+        const username = getUsername();
+        document.getElementById('user').innerText = username;
 
-        fetchWithAuth("https://vibezone-backend.fly.dev/api/get-wallet-balance/")
-            .then(res => res.json())
-            .then(data => {
-                if (data.success && data.data && typeof data.data.balance !== "undefined") {
-                    document.getElementById('wallet').innerText = data.data.balance;
-                } else {
+        if (!username) {
+            document.getElementById('wallet').innerText = "Username not found";
+        } else {
+            // Fetch wallet balance using public endpoint
+            fetch(`https://vibezone-backend.fly.dev/api/get-wallet-balance-public/?username=${encodeURIComponent(username)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success && data.data && typeof data.data.balance !== "undefined") {
+                        document.getElementById('wallet').innerText = data.data.balance;
+                    } else {
+                        document.getElementById('wallet').innerText = "Error loading balance";
+                    }
+                })
+                .catch(() => {
                     document.getElementById('wallet').innerText = "Error loading balance";
-                }
-            })
-            .catch(() => {
-                document.getElementById('wallet').innerText = "Error loading balance";
-            });
+                });
+        }
     </script>
 </body>
 
