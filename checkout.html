@@ -1,63 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Vibezone Payment</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding-top: 50px;
-      color: #333;
-    }
-    .status {
-      font-size: 18px;
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h3>Processing your payment....</h3>
-  <div class="status" id="status">Please wait while we redirect you to the payment page.</div>
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const order_id = urlParams.get('order_id');
-    const amount = urlParams.get('amount');
-    const key = urlParams.get('key');
-    const username = urlParams.get('username');
-
-    if (!order_id || !amount || !key || !username) {
-      document.getElementById('status').innerText = "❌ Missing payment parameters.";
-      throw new Error("Missing payment parameters");
-    }
-
-    const options = {
-      key: key,
-      amount: amount,
-      currency: "INR",
-      name: "Vibezone",
-      description: "Coin Purchase",
-      order_id: order_id,
-      handler: function (response) {
-        const deepLink = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
-        document.getElementById('status').innerText = "✅ Payment successful. Redirecting to app...";
-        window.location.href = deepLink;
-      },
-      modal: {
-        ondismiss: function () {
-          document.getElementById('status').innerText = "❌ Payment was cancelled.";
+    <meta charset="UTF-8">
+    <title>Vibezone Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+            color: #333;
         }
-      },
-      theme: {
-        color: "#FF9900"
-      }
-    };
 
-    const rzp = new Razorpay(options);
-    rzp.open();
-  </script>
+        .status {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Processing your payment....</h3>
+    <div class="status" id="status">Please wait while we redirect you to the payment page.</div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const order_id = urlParams.get('order_id');
+        const amount = urlParams.get('amount');
+        const key = urlParams.get('key');
+        const username = urlParams.get('username');
+        const platform = urlParams.get('platform') || 'flutter'; // default to flutter for safety
+
+        if (!order_id || !amount || !key || !username) {
+            document.getElementById('status').innerText = "❌ Missing payment parameters.";
+            throw new Error("Missing payment parameters");
+        }
+
+        const options = {
+            key: key,
+            amount: amount,
+            currency: "INR",
+            name: "Vibezone",
+            description: "Coin Purchase",
+            order_id: order_id,
+            handler: function (response) {
+                const successMessage = "✅ Payment successful. Redirecting...";
+                document.getElementById('status').innerText = successMessage;
+
+                if (platform === 'web') {
+                    // Redirect to dashboard after successful payment
+                    const webRedirectUrl = `https://techno-official.github.io/vibezone-payment-page/dashboard.html`;
+                    setTimeout(() => {
+                        window.location.href = webRedirectUrl;
+                    }, 1500);
+                } else {
+                    // Flutter deep link redirect
+                    const deepLink = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
+                    setTimeout(() => {
+                        window.location.href = deepLink;
+                    }, 1500);
+                }
+            },
+            modal: {
+                ondismiss: function () {
+                    document.getElementById('status').innerText = "❌ Payment was cancelled.";
+                }
+            },
+            theme: {
+                color: "#FF9900"
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+    </script>
 </body>
+
 </html>
