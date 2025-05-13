@@ -114,7 +114,7 @@
                     return;
                 }
 
-                const checkoutUrl = `checkout.html?order_id=${orderId}&amount=${amount}&key=${key}&username=${encodeURIComponent(username)}`;
+                const checkoutUrl = `websitecheckout.html?order_id=${orderId}&amount=${amount}&key=${key}&username=${encodeURIComponent(username)}`;
                 status.innerText = "✅ Redirecting to payment page...";
                 window.location.href = checkoutUrl;
             } catch (e) {
