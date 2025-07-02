@@ -19,23 +19,15 @@
             margin-top: 20px;
         }
 
-        .fallback-btn {
-            margin-top: 30px;
+        #fallback-btn {
             display: none;
-        }
-
-        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
             background-color: #FF9900;
             color: white;
-            padding: 12px 24px;
-            font-size: 16px;
             border: none;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #e68300;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -43,10 +35,7 @@
 <body>
     <h3>Processing your payment....</h3>
     <div class="status" id="status">Please wait while we redirect you to the payment page.</div>
-
-    <div class="fallback-btn" id="fallback-btn">
-        <button onclick="openAppManually()">Continue to Vibezone App</button>
-    </div>
+    <button id="fallback-btn" onclick="window.location.href = deepLink;">Continue to Vibezone App</button>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -60,13 +49,7 @@
             throw new Error("Missing payment parameters");
         }
 
-        const deepLink = `myapp://payment-success?payment_id=__PID__&order_id=__OID__&signature=__SIG__&amount=${amount}&username=${username}`;
-
-        function openAppManually() {
-            window.location.href = deepLinkReal; // uses final deep link
-        }
-
-        let deepLinkReal = ""; // will be populated after payment
+        let deepLink = "";
 
         const options = {
             key: key,
@@ -91,26 +74,27 @@
                         username: username
                     })
                 })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.error) {
-                        document.getElementById('status').innerText = "❌ Server error: " + data.error;
-                    } else {
-                        document.getElementById('status').innerText = "✅ Coins added! Redirecting to app...";
-                        deepLinkReal = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
-                        window.location.href = deepLinkReal;
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.error) {
+                            document.getElementById('status').innerText = "❌ Server error: " + data.error;
+                        } else {
+                            document.getElementById('status').innerText = "✅ Coins added! Redirecting to app...";
+                            deepLink = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
 
-                        // Show fallback button after 5 seconds
-                        setTimeout(() => {
-                            document.getElementById('fallback-btn').style.display = "block";
-                            document.getElementById('status').innerText += "\nIf not redirected, tap the button below.";
-                        }, 5000);
-                    }
-                })
-                .catch(err => {
-                    console.error("❌ Error confirming payment:", err);
-                    document.getElementById('status').innerText = "❌ Failed to confirm payment.";
-                });
+                            // Try auto-redirect
+                            window.location.href = deepLink;
+
+                            // Show fallback button in case auto redirect fails
+                            setTimeout(() => {
+                                document.getElementById("fallback-btn").style.display = "inline-block";
+                            }, 2000); // Wait 2 seconds
+                        }
+                    })
+                    .catch(err => {
+                        document.getElementById('status').innerText = "❌ Failed to confirm payment.";
+                        console.error(err);
+                    });
             },
             modal: {
                 ondismiss: function () {
