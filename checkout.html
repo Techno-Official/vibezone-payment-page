@@ -18,12 +18,35 @@
             font-size: 18px;
             margin-top: 20px;
         }
+
+        .fallback-btn {
+            margin-top: 30px;
+            display: none;
+        }
+
+        button {
+            background-color: #FF9900;
+            color: white;
+            padding: 12px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e68300;
+        }
     </style>
 </head>
 
 <body>
     <h3>Processing your payment....</h3>
     <div class="status" id="status">Please wait while we redirect you to the payment page.</div>
+
+    <div class="fallback-btn" id="fallback-btn">
+        <button onclick="openAppManually()">Continue to Vibezone App</button>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -37,6 +60,14 @@
             throw new Error("Missing payment parameters");
         }
 
+        const deepLink = `myapp://payment-success?payment_id=__PID__&order_id=__OID__&signature=__SIG__&amount=${amount}&username=${username}`;
+
+        function openAppManually() {
+            window.location.href = deepLinkReal; // uses final deep link
+        }
+
+        let deepLinkReal = ""; // will be populated after payment
+
         const options = {
             key: key,
             amount: amount,
@@ -45,9 +76,41 @@
             description: "Coin Purchase",
             order_id: order_id,
             handler: function (response) {
-                const deepLink = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
-                document.getElementById('status').innerText = "✅ Payment successful. Redirecting to app...";
-                window.location.href = deepLink;
+                document.getElementById('status').innerText = "✅ Payment successful. Confirming with server...";
+
+                fetch("https://vibezone-backend.fly.dev/confirm-payment/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        payment_id: response.razorpay_payment_id,
+                        order_id: response.razorpay_order_id,
+                        signature: response.razorpay_signature,
+                        amount: amount,
+                        username: username
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('status').innerText = "❌ Server error: " + data.error;
+                    } else {
+                        document.getElementById('status').innerText = "✅ Coins added! Redirecting to app...";
+                        deepLinkReal = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
+                        window.location.href = deepLinkReal;
+
+                        // Show fallback button after 5 seconds
+                        setTimeout(() => {
+                            document.getElementById('fallback-btn').style.display = "block";
+                            document.getElementById('status').innerText += "\nIf not redirected, tap the button below.";
+                        }, 5000);
+                    }
+                })
+                .catch(err => {
+                    console.error("❌ Error confirming payment:", err);
+                    document.getElementById('status').innerText = "❌ Failed to confirm payment.";
+                });
             },
             modal: {
                 ondismiss: function () {
