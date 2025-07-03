@@ -77,9 +77,9 @@
             const box = document.createElement("div");
             box.className = "coin-box";
             box.innerHTML = `
-        <div class="coin-amount">${item.coins} Coins</div>
-        <div class="price">₹${item.price}</div>
-      `;
+                <div class="coin-amount">${item.coins} Coins</div>
+                <div class="price">₹${item.price}</div>
+            `;
             box.onclick = () => startPayment(item.price);
             grid.appendChild(box);
         });
@@ -97,7 +97,7 @@
                 const response = await fetch("https://vibezone-backend.fly.dev/create-order/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ amount }),
+                    body: JSON.stringify({ amount, username }) // ✅ Send username to backend
                 });
 
                 if (!response.ok) {
