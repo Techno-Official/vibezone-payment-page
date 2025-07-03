@@ -50,15 +50,19 @@
         }
 
         let deepLink = "";
+        let paymentAlreadyProcessed = false;
 
         const options = {
             key: key,
-            amount: amount,
+            amount: parseInt(amount), // ✅ Ensure it's an integer
             currency: "INR",
             name: "Vibezone",
             description: "Coin Purchase",
             order_id: order_id,
             handler: function (response) {
+                if (paymentAlreadyProcessed) return; // ✅ Prevent double fetch
+                paymentAlreadyProcessed = true;
+
                 document.getElementById('status').innerText = "✅ Payment successful. Confirming with server...";
 
                 fetch("https://vibezone-backend.fly.dev/confirm-payment/", {
@@ -74,27 +78,29 @@
                         username: username
                     })
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.error) {
-                            document.getElementById('status').innerText = "❌ Server error: " + data.error;
-                        } else {
-                            document.getElementById('status').innerText = "✅ Coins added! Redirecting to app...";
-                            deepLink = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById('status').innerText = "❌ Server error: " + data.error;
+                        paymentAlreadyProcessed = false; // Allow retry if needed
+                    } else {
+                        document.getElementById('status').innerText = "✅ Coins added! Redirecting to app...";
+                        deepLink = `myapp://payment-success?payment_id=${response.razorpay_payment_id}&order_id=${response.razorpay_order_id}&signature=${response.razorpay_signature}&amount=${amount}&username=${username}`;
 
-                            // Try auto-redirect
-                            window.location.href = deepLink;
+                        // Try auto-redirect
+                        window.location.href = deepLink;
 
-                            // Show fallback button in case auto redirect fails
-                            setTimeout(() => {
-                                document.getElementById("fallback-btn").style.display = "inline-block";
-                            }, 2000); // Wait 2 seconds
-                        }
-                    })
-                    .catch(err => {
-                        document.getElementById('status').innerText = "❌ Failed to confirm payment.";
-                        console.error(err);
-                    });
+                        // Show fallback button in case auto redirect fails
+                        setTimeout(() => {
+                            document.getElementById("fallback-btn").style.display = "inline-block";
+                        }, 2000);
+                    }
+                })
+                .catch(err => {
+                    document.getElementById('status').innerText = "❌ Failed to confirm payment.";
+                    paymentAlreadyProcessed = false;
+                    console.error(err);
+                });
             },
             modal: {
                 ondismiss: function () {
