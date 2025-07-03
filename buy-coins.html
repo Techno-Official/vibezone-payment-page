@@ -80,7 +80,8 @@
                 <div class="coin-amount">${item.coins} Coins</div>
                 <div class="price">₹${item.price}</div>
             `;
-            box.onclick = () => startPayment(item.price);
+            //box.onclick = () => startPayment(item.price);
+            box.onclick = () => startPayment(item.price * 100);  // Pass paise to backend/Razorpay
             grid.appendChild(box);
         });
 
