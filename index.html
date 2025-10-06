@@ -3,43 +3,138 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to Vibezone</title>
+    <title>Vibezone - Connect, Talk, and Earn 🎧</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        /* Reset & Basic */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 60px 20px;
-            background: #f9f9f9;
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: #f9fafb;
             color: #333;
         }
 
-        h1 {
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            background: #111;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
             color: #FF9900;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
         }
 
-        p {
-            font-size: 1.1rem;
+        nav a {
+            margin: 0 15px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #FF9900;
+        }
+
+        .btn-nav {
+            background: #FF9900;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-nav:hover {
+            background: #e88e00;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px 60px;
+            background: linear-gradient(120deg, #fff, #fff7e6);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            color: #FF9900;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
             margin-bottom: 30px;
+            color: #555;
         }
 
-        .btn {
+        .hero .btn {
             display: inline-block;
             margin: 10px;
-            padding: 14px 28px;
+            padding: 14px 32px;
             background-color: #FF9900;
             color: white;
             font-size: 1rem;
-            text-decoration: none;
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.3s;
         }
 
-        .btn:hover {
+        .hero .btn:hover {
             background-color: #e88e00;
+        }
+
+        /* Features */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 60px 20px;
+            background: white;
+        }
+
+        .feature {
+            background: #fff9f0;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 320px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .feature h3 {
+            color: #FF9900;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* Auth Section */
+        .section {
+            margin-top: 40px;
+            text-align: center;
         }
 
         .message {
@@ -53,31 +148,93 @@
             font-weight: bold;
         }
 
-        .section {
-            margin-top: 40px;
+        /* Footer */
+        footer {
+            background: #111;
+            color: #ccc;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #FF9900;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h1>Welcome to Vibezone 🎧</h1>
-    <p>Buy coins to enjoy premium one-to-one audio calls with Vibezone!</p>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Vibezone 🎧</div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="buy-coins.html">Buy Coins</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.html" class="btn-nav">Login</a>
+        </nav>
+    </header>
 
-    <!-- Download App Button -->
-    <a href="https://github.com/Harikrishnan-TM/vibezone_flutter/releases/download/v1.0.0/app-release.apk" 
-       class="btn" download>
-       📥 Download App
-    </a>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Connect, Talk, and Earn on Vibezone</h1>
+        <p>Enjoy one-to-one audio calls, meet new people, and explore premium features with Vibezone Coins.</p>
 
-    <!-- Buy Coins -->
-    <a href="buy-coins.html" class="btn">💰 Buy Coins</a>
+        <a href="https://github.com/Harikrishnan-TM/vibezone_flutter/releases/download/v1.0.0/app-release.apk"
+            class="btn" download>📥 Download App</a>
 
-    <!-- Auth Section -->
-    <div id="authButtons" class="section">
-        <!-- Login/Signup or Logout will be injected here -->
-    </div>
+        <a href="buy-coins.html" class="btn">💰 Buy Coins</a>
 
-    <div class="message" id="logoutMessage"></div>
+        <div id="authButtons" class="section"></div>
+        <div class="message" id="logoutMessage"></div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <div class="feature">
+            <h3>🎙️ Private Audio Calls</h3>
+            <p>Experience high-quality one-to-one audio calls with total privacy and clarity.</p>
+        </div>
+        <div class="feature">
+            <h3>💎 Buy & Earn Coins</h3>
+            <p>Use Vibezone Coins for exclusive features, or earn more by hosting conversations.</p>
+        </div>
+        <div class="feature">
+            <h3>🔒 Secure Platform</h3>
+            <p>Your conversations and data are protected with end-to-end encryption.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Vibezone. All Rights Reserved.</p>
+        <p>Follow us on <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">Facebook</a></p>
+    </footer>
 
     <script>
         function renderButtons() {
@@ -109,9 +266,7 @@
             try {
                 const response = await fetch('https://vibezone-backend.fly.dev/api/website-logout/', {
                     method: 'POST',
-                    headers: {
-                        'Authorization': `Token ${token}`,
-                    }
+                    headers: { 'Authorization': `Token ${token}` }
                 });
 
                 const data = await response.json();
@@ -120,7 +275,7 @@
                     localStorage.clear();
                     document.getElementById('logoutMessage').textContent = '✅ Logged out successfully!';
                     document.getElementById('logoutMessage').className = 'message';
-                    renderButtons(); // Re-render buttons after logout
+                    renderButtons();
                 } else {
                     document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
                     document.getElementById('logoutMessage').className = 'error';
@@ -131,7 +286,6 @@
             }
         }
 
-        // Initial render
         renderButtons();
     </script>
 </body>
