@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Vibzeo - Techzniczone</title>
+    <style>
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #FF9900;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #e88e00;
+        }
+
+        .company-info {
+            margin-top: 40px;
+            background: #fff9f0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #777;
+            font-size: 0.9rem;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #FF9900;
+            margin: 0 8px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Contact Vibzeo</h1>
+
+    <p>We’d love to hear from you! If you have any questions, feedback, or need support regarding Vibzeo, please use the form below or reach out directly via our contact details.</p>
+
+    <!-- Contact Form -->
+    <form id="contactForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+
+    <div class="company-info">
+        <h2>Company Information</h2>
+        <p>
+            <strong>Company Name:</strong> Techzniczone<br>
+            <strong>Registered Address:</strong> Site no677, 1st Floor, Suite# 441, 27th Main, 13th Cross, HSR Layout, Sector 1, Bangalore - 560102, Karnataka, India<br>
+            <strong>Contact Number:</strong> 6235105423<br>
+            <strong>Email:</strong> <a href="mailto:support@techzniczone.com">support@techzniczone.com</a>
+        </p>
+    </div>
+
+    <footer>
+        <p>© 2025 Vibzeo. All Rights Reserved.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a> |
+            <a href="privacypolicy.html">Privacy Policy</a> |
+            <a href="Terms.html">Terms of Service</a> |
+            <a href="communityguidelines.html">Community Guidelines</a> |
+            <a href="refundpolicy.html">Refund Policy</a>
+        </div>
+        <p style="margin-top: 10px;">A product by <strong>Techzniczone, Bangalore</strong></p>
+    </footer>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!name || !email || !message) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            // Placeholder: Replace with backend endpoint
+            alert("Thank you, " + name + "! Your message has been submitted. We will get back to you soon.");
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>
