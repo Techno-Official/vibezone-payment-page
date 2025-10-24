@@ -532,8 +532,8 @@
             <a href="#features">Features</a>
             <a href="#screenshots">Screenshots</a>
             <a href="#about">About</a>
-            <a href="privacy-policy.html">Privacy</a>
-            <a href="#download" class="btn-nav">Download</a>
+            <a href="buy-coins.html">Buy Coins</a>
+            <a href="login.html" class="btn-nav">Login</a>
         </nav>
     </header>
 
@@ -552,6 +552,9 @@
                     ✨ Explore Features
                 </a>
             </div>
+            
+            <div id="authButtons" class="cta-buttons"></div>
+            <div id="logoutMessage" style="margin-top: 20px; font-weight: 600;"></div>
             
             <div class="store-badge">Coming soon to Google Play Store</div>
         </div>
@@ -697,6 +700,61 @@
             <p style="margin-top: 10px; font-size: 0.85rem;">This app is currently in early access. Official Google Play Store release coming soon.</p>
         </div>
     </footer>
+
+    <script>
+        function renderButtons() {
+            const token = localStorage.getItem('auth_token');
+            const username = localStorage.getItem('username');
+            const authButtons = document.getElementById('authButtons');
+
+            if (token) {
+                authButtons.innerHTML = `
+                    <div style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); padding: 20px 30px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.3);">
+                        <p style="margin-bottom: 15px; font-size: 1.1rem;">Welcome back, <strong>${username || 'User'}</strong>! 👋</p>
+                        <button class="btn btn-primary" onclick="logout()" style="cursor: pointer;">Logout</button>
+                    </div>
+                `;
+            } else {
+                authButtons.innerHTML = `
+                    <a href="login.html" class="btn btn-primary">🔑 Login</a>
+                    <a href="signup.html" class="btn btn-secondary">📝 Sign Up</a>
+                `;
+            }
+        }
+
+        async function logout() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                document.getElementById('logoutMessage').textContent = 'You are not logged in.';
+                document.getElementById('logoutMessage').style.color = '#ef4444';
+                return;
+            }
+
+            try {
+                const response = await fetch('https://vibezone-backend.fly.dev/api/website-logout/', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Token ${token}` }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.clear();
+                    document.getElementById('logoutMessage').textContent = '✅ Logged out successfully!';
+                    document.getElementById('logoutMessage').style.color = '#10b981';
+                    renderButtons();
+                } else {
+                    document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
+                    document.getElementById('logoutMessage').style.color = '#ef4444';
+                }
+            } catch (error) {
+                document.getElementById('logoutMessage').textContent = 'Error: ' + error.message;
+                document.getElementById('logoutMessage').style.color = '#ef4444';
+            }
+        }
+
+        renderButtons();
+    </script>
 </body>
 
 </html>
