@@ -3,8 +3,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Vibezone - Connect, Talk, and Earn 🎧</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibzeo - Connect Through Voice | Official App by Techzniczone</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Vibzeo is a premium voice calling app for meaningful conversations. Download early access now. Coming soon to Google Play Store. Developed by Techzniczone, Bangalore.">
+    <meta name="keywords" content="voice calling app, audio chat, social networking, Vibzeo, Techzniczone">
+    <meta name="author" content="Techzniczone">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
+    <meta property="og:title" content="Vibzeo - Connect Through Voice">
+    <meta property="og:description" content="Experience premium voice calling with Vibzeo. Join our early access program and be among the first to connect.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vibzeo.com">
+    <meta property="og:image" content="https://vibzeo.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Vibzeo">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vibzeo - Connect Through Voice">
+    <meta name="twitter:description" content="Experience premium voice calling with Vibzeo. Join our early access program today.">
+    <meta name="twitter:image" content="https://vibzeo.com/images/twitter-card.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
     <style>
         /* Reset & Basic */
         * {
@@ -14,9 +38,11 @@
         }
 
         body {
-            font-family: "Poppins", Arial, sans-serif;
-            background-color: #f9fafb;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
@@ -27,169 +53,467 @@
         /* Header */
         header {
             width: 100%;
-            background: #111;
-            color: white;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
+            padding: 18px 5%;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .logo {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #FF9900;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: #64748b;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
 
         nav a {
-            margin: 0 15px;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
             transition: color 0.3s;
         }
 
         nav a:hover {
-            color: #FF9900;
+            color: #6366f1;
         }
 
         .btn-nav {
-            background: #FF9900;
-            padding: 10px 20px;
-            border-radius: 6px;
+            background: #6366f1;
+            padding: 10px 24px;
+            border-radius: 8px;
             color: white;
-            font-weight: 500;
-            transition: background 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
         .btn-nav:hover {
-            background: #e88e00;
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
         /* Hero Section */
         .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
             text-align: center;
-            padding: 100px 20px 60px;
-            background: linear-gradient(120deg, #fff, #fff7e6);
+            padding: 100px 5% 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="rgba(255,255,255,0.05)" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path></svg>') bottom center no-repeat;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .early-access-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .hero h1 {
-            font-size: 2.8rem;
-            color: #FF9900;
+            font-size: 3.5rem;
+            font-weight: 800;
             margin-bottom: 20px;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: #555;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 14px 32px;
-            background-color: #FF9900;
-            color: white;
-            font-size: 1rem;
-            border-radius: 8px;
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 12px;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            border: none;
         }
 
-        .hero .btn:hover {
-            background-color: #e88e00;
+        .btn-primary {
+            background-color: white;
+            color: #6366f1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .store-badge {
+            display: inline-block;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* App Screenshots */
+        .screenshots {
+            padding: 80px 5%;
+            background: #f8fafc;
+            text-align: center;
+        }
+
+        .screenshots h2 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .screenshots-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .screenshot-gallery {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .screenshot-item {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+            max-width: 280px;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .screenshot-placeholder {
+            width: 240px;
+            height: 480px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .screenshot-placeholder::before {
+            content: '📱';
+            font-size: 4rem;
+            position: absolute;
+            opacity: 0.2;
+        }
+
+        .screenshot-caption {
+            margin-top: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
         /* Features */
         .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            padding: 60px 20px;
+            padding: 80px 5%;
             background: white;
         }
 
-        .feature {
-            background: #fff9f0;
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 320px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        .features-header {
             text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .features-header h2 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .features-header p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 35px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .feature:hover {
+            border-color: #6366f1;
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
         }
 
         .feature h3 {
-            color: #FF9900;
-            margin-bottom: 10px;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
 
         .feature p {
-            color: #555;
-            font-size: 0.95rem;
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
-        /* Auth Section */
-        .section {
-            margin-top: 40px;
+        /* Company Info */
+        .company-info {
+            padding: 80px 5%;
+            background: #f8fafc;
             text-align: center;
         }
 
-        .message {
-            margin-top: 20px;
-            color: green;
-            font-weight: bold;
+        .company-info h2 {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            font-weight: 700;
         }
 
-        .error {
-            color: red;
-            font-weight: bold;
+        .company-details {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .company-details p {
+            color: #475569;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .company-details strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .company-logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
         }
 
         /* Footer */
         footer {
-            background: #111;
-            color: #ccc;
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 60px 5% 30px;
         }
 
-        footer p {
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #6366f1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #6366f1;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom p {
             margin-bottom: 10px;
         }
 
-        footer a {
-            color: #FF9900;
-            margin: 0 8px;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-links {
-            margin-top: 10px;
-            font-size: 0.95rem;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             nav {
                 display: none;
             }
 
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
-            .features {
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .screenshots h2,
+            .features-header h2,
+            .company-info h2 {
+                font-size: 2rem;
+            }
+
+            .screenshot-gallery {
                 flex-direction: column;
                 align-items: center;
             }
@@ -200,116 +524,179 @@
 <body>
     <!-- HEADER -->
     <header>
-        <div class="logo">Vibezone 🎧</div>
+        <div class="logo-section">
+            <div class="logo">Vibzeo</div>
+            <div class="logo-tagline">by Techzniczone</div>
+        </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="buy-coins.html">Buy Coins</a>
-            <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
-            <a href="login.html" class="btn-nav">Login</a>
+            <a href="#features">Features</a>
+            <a href="#screenshots">Screenshots</a>
+            <a href="#about">About</a>
+            <a href="privacy-policy.html">Privacy</a>
+            <a href="#download" class="btn-nav">Download</a>
         </nav>
     </header>
 
     <!-- HERO SECTION -->
-    <section class="hero">
-        <h1>Connect, Talk, and Earn on Vibezone</h1>
-        <p>Enjoy one-to-one audio calls, meet new people, and explore premium features with Vibezone Coins.</p>
+    <section class="hero" id="download">
+        <div class="hero-content">
+            <div class="early-access-badge">🎉 Early Access Available Now</div>
+            <h1>Connect Through Voice</h1>
+            <p>Experience premium one-to-one voice calling with crystal-clear audio quality. Join thousands already connecting on Vibzeo.</p>
+            
+            <div class="cta-buttons">
+                <a href="https://github.com/Harikrishnan-TM/vibezone_flutter/releases/download/v1.0.0/app-release.apk" class="btn btn-primary" download>
+                    📥 Download Early Access
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    ✨ Explore Features
+                </a>
+            </div>
+            
+            <div class="store-badge">Coming soon to Google Play Store</div>
+        </div>
+    </section>
 
-        <a href="https://github.com/Harikrishnan-TM/vibezone_flutter/releases/download/v1.0.0/app-release.apk"
-            class="btn" download>📥 Download App</a>
-
-        <a href="buy-coins.html" class="btn">💰 Buy Coins</a>
-
-        <div id="authButtons" class="section"></div>
-        <div class="message" id="logoutMessage"></div>
+    <!-- APP SCREENSHOTS -->
+    <section class="screenshots" id="screenshots">
+        <h2>See Vibzeo in Action</h2>
+        <p class="screenshots-subtitle">Discover how easy it is to connect with friends through our beautiful and intuitive interface</p>
+        
+        <div class="screenshot-gallery">
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <span>Voice Calling<br>Interface</span>
+                </div>
+                <div class="screenshot-caption">Crystal Clear Calls</div>
+            </div>
+            
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <span>User<br>Dashboard</span>
+                </div>
+                <div class="screenshot-caption">Easy Navigation</div>
+            </div>
+            
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <span>Coin<br>Management</span>
+                </div>
+                <div class="screenshot-caption">Earn & Spend</div>
+            </div>
+            
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <span>Profile<br>Settings</span>
+                </div>
+                <div class="screenshot-caption">Personalize Your Experience</div>
+            </div>
+        </div>
     </section>
 
     <!-- FEATURES -->
-    <section class="features">
-        <div class="feature">
-            <h3>🎙️ Private Audio Calls</h3>
-            <p>Experience high-quality one-to-one audio calls with total privacy and clarity.</p>
+    <section class="features" id="features">
+        <div class="features-header">
+            <h2>Why Choose Vibzeo?</h2>
+            <p>Built with cutting-edge technology to provide you the best voice calling experience</p>
         </div>
-        <div class="feature">
-            <h3>💎 Buy & Earn Coins</h3>
-            <p>Use Vibezone Coins for exclusive features, or earn more by hosting conversations.</p>
+        
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">🎙️</div>
+                <h3>HD Voice Quality</h3>
+                <p>Experience crystal-clear audio with our advanced voice compression technology for seamless conversations.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Your privacy matters. All calls are encrypted end-to-end, ensuring your conversations stay private.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">💎</div>
+                <h3>Coin System</h3>
+                <p>Purchase Vibzeo Coins for premium features or earn coins by hosting engaging conversations.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">👥</div>
+                <h3>Meet New People</h3>
+                <p>Connect with interesting people from around the world and build meaningful relationships.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Optimized performance ensures instant connections and smooth calling experience every time.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <h3>Track Your Activity</h3>
+                <p>Monitor your call history, earnings, and spending with detailed analytics and insights.</p>
+            </div>
         </div>
-        <div class="feature">
-            <h3>🔒 Secure Platform</h3>
-            <p>Your conversations and data are protected with end-to-end encryption.</p>
+    </section>
+
+    <!-- COMPANY INFO -->
+    <section class="company-info" id="about">
+        <h2>About Techzniczone</h2>
+        <div class="company-details">
+            <div class="company-logo-placeholder">🏢</div>
+            <p><strong>Vibzeo</strong> is proudly developed and distributed by <strong>Techzniczone</strong>, a registered technology company based in Bangalore, India.</p>
+            <p><strong>Registered Address:</strong><br>
+            1st Floor, 677, 13th Cross, 27th Main Rd,<br>
+            1st Sector, HSR Layout,<br>
+            Bengaluru, Karnataka 560102, India</p>
+            <p style="margin-top: 25px;">We are committed to building innovative communication solutions that bring people together. Vibzeo is our flagship product, designed to revolutionize how people connect through voice.</p>
+            <p><strong>Early Access Program:</strong> Download Vibzeo now and be among the first to experience the future of voice communication. Official Google Play Store launch coming soon!</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2025 Vibezone. All Rights Reserved.</p>
-        <p>Follow us on 
-            <a href="#">Instagram</a> | 
-            <a href="#">Twitter</a> | 
-            <a href="#">Facebook</a>
-        </p>
-
-        <div class="footer-links">
-            <a href="privacypolicy.html">Privacy Policy</a> |
-            <a href="Terms.html">Terms of Service</a> |
-            <a href="communityguidelines.html">Community Guidelines</a> |
-            <a href="refundpolicy.html">Refund Policy</a>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Vibzeo</h3>
+                <p>Premium voice calling platform for meaningful connections.</p>
+                <p style="margin-top: 15px;">Early Access Available<br>Play Store Coming Soon</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#download">Download App</a></p>
+                <p><a href="#features">Features</a></p>
+                <p><a href="#screenshots">Screenshots</a></p>
+                <p><a href="buy-coins.html">Buy Coins</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <p><a href="privacy-policy.html">Privacy Policy</a></p>
+                <p><a href="terms-of-service.html">Terms of Service</a></p>
+                <p><a href="community-guidelines.html">Community Guidelines</a></p>
+                <p><a href="refund-policy.html">Refund Policy</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <p>Follow us on social media for updates and announcements</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                </div>
+            </div>
         </div>
-        <p style="margin-top: 10px;">A product by <strong>Techzniczone, Bangalore</strong></p>
+        
+        <div class="footer-bottom">
+            <p><strong>Techzniczone</strong> | 1st Floor, 677, 13th Cross, 27th Main Rd, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
+            <p>© 2025 Techzniczone. All rights reserved. Vibzeo is a registered trademark of Techzniczone.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">This app is currently in early access. Official Google Play Store release coming soon.</p>
+        </div>
     </footer>
-
-    <script>
-        function renderButtons() {
-            const token = localStorage.getItem('auth_token');
-            const username = localStorage.getItem('username');
-            const authButtons = document.getElementById('authButtons');
-
-            if (token) {
-                authButtons.innerHTML = `
-                    <p>Hi, ${username || 'User'} 👋</p>
-                    <button class="btn" onclick="logout()">Logout</button>
-                `;
-            } else {
-                authButtons.innerHTML = `
-                    <a href="login.html" class="btn">🔑 Login</a>
-                    <a href="signup.html" class="btn">📝 Sign Up</a>
-                `;
-            }
-        }
-
-        async function logout() {
-            const token = localStorage.getItem('auth_token');
-            if (!token) {
-                document.getElementById('logoutMessage').textContent = 'You are not logged in.';
-                document.getElementById('logoutMessage').className = 'error';
-                return;
-            }
-
-            try {
-                const response = await fetch('https://vibezone-backend.fly.dev/api/website-logout/', {
-                    method: 'POST',
-                    headers: { 'Authorization': `Token ${token}` }
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    localStorage.clear();
-                    document.getElementById('logoutMessage').textContent = '✅ Logged out successfully!';
-                    document.getElementById('logoutMessage').className = 'message';
-                    renderButtons();
-                } else {
-                    document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
-                    document.getElementById('logoutMessage').className = 'error';
-                }
-            } catch (error) {
-                document.getElementById('logoutMessage').textContent = 'Error: ' + error.message;
-                document.getElementById('logoutMessage').className = 'error';
-            }
-        }
-
-        renderButtons();
-    </script>
 </body>
 
 </html>
