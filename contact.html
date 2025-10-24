@@ -4,152 +4,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Vibzeo - Techzniczone</title>
+    <title>Contact Us - Vibzeo | Techzniczone</title>
+    
     <style>
-        body {
-            font-family: "Poppins", Arial, sans-serif;
-            background-color: #f9fafb;
-            color: #333;
-            line-height: 1.6;
-            padding: 40px 20px;
-            max-width: 900px;
-            margin: auto;
+        /* Reset & Basic */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            color: #FF9900;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: #64748b;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #6366f1;
+        }
+
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 10px;
+        }
+
+        .btn-login {
+            color: #6366f1;
+            font-weight: 600;
+            padding: 8px 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #f1f5f9;
+            border-radius: 6px;
+        }
+
+        .btn-signup {
+            background: #6366f1;
+            padding: 10px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-signup:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 5% 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="rgba(255,255,255,0.05)" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path></svg>') bottom center no-repeat;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 5%;
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .contact-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: #6366f1;
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 3rem;
             margin-bottom: 20px;
         }
 
-        p {
-            margin-bottom: 16px;
+        .contact-card h3 {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
+        .contact-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
 
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1rem;
+        .contact-link {
+            display: inline-block;
+            color: #6366f1;
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 10px;
+            transition: all 0.3s;
         }
 
-        textarea {
-            resize: vertical;
+        .contact-link:hover {
+            transform: scale(1.05);
         }
 
-        button {
-            margin-top: 20px;
-            padding: 12px 24px;
-            background-color: #FF9900;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background-color: #e88e00;
-        }
-
+        /* Company Info */
         .company-info {
-            margin-top: 40px;
-            background: #fff9f0;
-            padding: 20px;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .company-info h2 {
+            color: #1a1a1a;
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
             border-radius: 10px;
         }
 
+        .info-icon {
+            font-size: 1.5rem;
+            min-width: 30px;
+        }
+
+        .info-content strong {
+            color: #1a1a1a;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-content p {
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        /* Footer */
         footer {
-            text-align: center;
-            margin-top: 60px;
-            color: #777;
-            font-size: 0.9rem;
-            padding: 20px;
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 60px 5% 30px;
         }
 
-        footer a {
-            color: #FF9900;
-            margin: 0 8px;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        .footer-links {
-            margin-top: 10px;
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e1;
             font-size: 0.95rem;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #6366f1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #6366f1;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .company-info {
+                padding: 30px 20px;
+            }
+
+            .info-item {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h1>Contact Vibzeo</h1>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo-section">
+            <div class="logo">Vibzeo</div>
+            <div class="logo-tagline">by Techzniczone</div>
+        </a>
+        <nav>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#screenshots">Screenshots</a>
+            <a href="index.html#about">About</a>
+            <a href="buy-coins.html">Buy Coins</a>
+            <div id="navAuthButtons" class="nav-auth"></div>
+        </nav>
+    </header>
 
-    <p>We’d love to hear from you! If you have any questions, feedback, or need support regarding Vibzeo, please use the form below or reach out directly via our contact details.</p>
-
-    <!-- Contact Form -->
-    <form id="contactForm">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
-
-        <button type="submit">Send Message</button>
-    </form>
-
-    <div class="company-info">
-        <h2>Company Information</h2>
-        <p>
-            <strong>Company Name:</strong> Techzniczone<br>
-            <strong>Registered Address:</strong> Site no677, 1st Floor, Suite# 441, 27th Main, 13th Cross, HSR Layout, Sector 1, Bangalore - 560102, Karnataka, India<br>
-            <strong>Contact Number:</strong> 6235105423<br>
-            <strong>Email:</strong> <a href="mailto:support@techzniczone.com">support@techzniczone.com</a>
-        </p>
-    </div>
-
-    <footer>
-        <p>© 2025 Vibzeo. All Rights Reserved.</p>
-        <div class="footer-links">
-            <a href="index.html">Home</a> |
-            <a href="privacypolicy.html">Privacy Policy</a> |
-            <a href="Terms.html">Terms of Service</a> |
-            <a href="communityguidelines.html">Community Guidelines</a> |
-            <a href="refundpolicy.html">Refund Policy</a>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Get in Touch</h1>
+            <p>We're here to help! Reach out to us anytime for support, questions, or feedback.</p>
         </div>
-        <p style="margin-top: 10px;">A product by <strong>Techzniczone, Bangalore</strong></p>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">📞</div>
+                    <h3>Call Us</h3>
+                    <p>Have an urgent query? Give us a call and we'll be happy to assist you.</p>
+                    <a href="tel:6235105423" class="contact-link">6235105423</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email Us</h3>
+                    <p>Send us your questions, feedback, or support requests via email.</p>
+                    <a href="mailto:support@techzniczone.com" class="contact-link">support@techzniczone.com</a>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-icon">🕐</div>
+                    <h3>Support Hours</h3>
+                    <p>Our support team is available to assist you during business hours.</p>
+                    <span class="contact-link" style="cursor: default;">Mon - Sat: 9 AM - 6 PM IST</span>
+                </div>
+            </div>
+
+            <div class="company-info">
+                <h2>Company Information</h2>
+                
+                <div class="info-item">
+                    <div class="info-icon">🏢</div>
+                    <div class="info-content">
+                        <strong>Company Name</strong>
+                        <p>Techzniczone</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <strong>Registered Address</strong>
+                        <p>1st Floor, 677, 13th Cross, 27th Main Rd,<br>
+                        1st Sector, HSR Layout,<br>
+                        Bengaluru, Karnataka 560102, India</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <strong>Contact Number</strong>
+                        <p><a href="tel:6235105423" style="color: #6366f1;">6235105423</a></p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div class="info-content">
+                        <strong>Email Address</strong>
+                        <p><a href="mailto:support@techzniczone.com" style="color: #6366f1;">support@techzniczone.com</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Vibzeo</h3>
+                <p>Premium voice calling platform for meaningful connections.</p>
+                <p style="margin-top: 15px;">Early Access Available<br>Play Store Coming Soon</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="index.html#download">Download App</a></p>
+                <p><a href="index.html#features">Features</a></p>
+                <p><a href="index.html#screenshots">Screenshots</a></p>
+                <p><a href="buy-coins.html">Buy Coins</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <p><a href="privacy-policy.html">Privacy Policy</a></p>
+                <p><a href="terms-of-service.html">Terms of Service</a></p>
+                <p><a href="community-guidelines.html">Community Guidelines</a></p>
+                <p><a href="refund-policy.html">Refund Policy</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <p>Follow us on social media for updates and announcements</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p><strong>Techzniczone</strong> | 1st Floor, 677, 13th Cross, 27th Main Rd, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
+            <p>© 2025 Techzniczone. All rights reserved. Vibzeo is a registered trademark of Techzniczone.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">This app is currently in early access. Official Google Play Store release coming soon.</p>
+        </div>
     </footer>
 
     <script>
-        document.getElementById("contactForm").addEventListener("submit", function (e) {
-            e.preventDefault();
+        function renderButtons() {
+            const token = localStorage.getItem('auth_token');
+            const username = localStorage.getItem('username');
+            const navAuthButtons = document.getElementById('navAuthButtons');
 
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const message = document.getElementById("message").value.trim();
-
-            if (!name || !email || !message) {
-                alert("Please fill in all fields.");
-                return;
+            if (token) {
+                navAuthButtons.innerHTML = `
+                    <div class="user-menu">
+                        <span>Hi, ${username || 'User'}</span>
+                        <a href="dashboard.html" style="color: #6366f1; font-weight: 600; margin-left: 10px;">Dashboard</a>
+                    </div>
+                `;
+            } else {
+                navAuthButtons.innerHTML = `
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                `;
             }
+        }
 
-            // Placeholder: Replace with backend endpoint
-            alert("Thank you, " + name + "! Your message has been submitted. We will get back to you soon.");
-            this.reset();
-        });
+        renderButtons();
     </script>
 </body>
 

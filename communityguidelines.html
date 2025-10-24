@@ -1,93 +1,597 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Community Guidelines | Vibzeo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      line-height: 1.7;
-      padding: 20px;
-      color: #333;
-      background-color: #fafafa;
-    }
-    h1, h2, h3 {
-      color: #222;
-    }
-    ul {
-      margin-left: 20px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Guidelines - Vibzeo | Techzniczone</title>
+    
+    <style>
+        /* Reset & Basic */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: #64748b;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #6366f1;
+        }
+
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 10px;
+        }
+
+        .btn-login {
+            color: #6366f1;
+            font-weight: 600;
+            padding: 8px 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #f1f5f9;
+            border-radius: 6px;
+        }
+
+        .btn-signup {
+            background: #6366f1;
+            padding: 10px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-signup:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 5% 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="rgba(255,255,255,0.05)" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path></svg>') bottom center no-repeat;
+            background-size: cover;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .last-updated {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 80px 5%;
+            background: white;
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            color: #475569;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 16px;
+            border-left: 4px solid #6366f1;
+        }
+
+        .guideline-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .guideline-card:hover {
+            border-color: #6366f1;
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .guideline-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .guideline-icon {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .guideline-card h2 {
+            color: #1a1a1a;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .guideline-card > p {
+            color: #475569;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .guideline-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .guideline-card li {
+            color: #64748b;
+            font-size: 1rem;
+            line-height: 1.7;
+            padding: 12px 0 12px 35px;
+            position: relative;
+        }
+
+        .guideline-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Box */
+        .contact-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .contact-box h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-box p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .contact-box a {
+            color: white;
+            font-weight: 600;
+            text-decoration: underline;
+            transition: opacity 0.3s;
+        }
+
+        .contact-box a:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 60px 5% 30px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #6366f1;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #6366f1;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 30px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .guideline-card {
+                padding: 30px 20px;
+            }
+
+            .guideline-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-box {
+                padding: 30px 20px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <h1>Community Guidelines</h1>
-  <p><strong>Last updated:</strong> October 6, 2025</p>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo-section">
+            <div class="logo">Vibzeo</div>
+            <div class="logo-tagline">by Techzniczone</div>
+        </a>
+        <nav>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#screenshots">Screenshots</a>
+            <a href="index.html#about">About</a>
+            <a href="buy-coins.html">Buy Coins</a>
+            <a href="contact.html">Contact</a>
+            <div id="navAuthButtons" class="nav-auth"></div>
+        </nav>
+    </header>
 
-  <p>Welcome to <strong>Vibzeo</strong> — a platform built by <strong>Techzniczone</strong>, Bangalore, where users can enjoy one-to-one audio interactions in a safe, respectful, and enjoyable environment.</p>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Community Guidelines</h1>
+            <p>Building a safe, respectful, and positive environment for everyone</p>
+            <div class="last-updated">Last updated: October 6, 2025</div>
+        </div>
+    </section>
 
-  <p>These Community Guidelines are designed to ensure that all users of Vibzeo can connect, communicate, and earn in a healthy and positive space. Every user, both callers and hosts, must follow these rules while using the app.</p>
+    <!-- CONTENT SECTION -->
+    <section class="content-section">
+        <div class="content-container">
+            <div class="intro-text">
+                Welcome to <strong>Vibzeo</strong> — a platform built by <strong>Techzniczone</strong>, Bangalore, where users can enjoy one-to-one audio interactions in a safe, respectful, and enjoyable environment. These Community Guidelines are designed to ensure that all users of Vibzeo can connect, communicate, and earn in a healthy and positive space. Every user, both callers and hosts, must follow these rules while using the app.
+            </div>
 
-  <h2>1. Respectful Communication</h2>
-  <p>Be kind and respectful at all times. Harassment, abuse, threats, hate speech, or offensive behavior are strictly prohibited. Everyone deserves a safe and comfortable experience.</p>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">🤝</div>
+                    <h2>1. Respectful Communication</h2>
+                </div>
+                <p>Be kind and respectful at all times. Harassment, abuse, threats, hate speech, or offensive behavior are strictly prohibited. Everyone deserves a safe and comfortable experience.</p>
+                <ul>
+                    <li>Do not use vulgar, obscene, or sexually explicit language.</li>
+                    <li>Do not insult, bully, or demean others based on gender, race, religion, or background.</li>
+                    <li>Do not engage in arguments or personal attacks during calls.</li>
+                </ul>
+            </div>
 
-  <ul>
-    <li>Do not use vulgar, obscene, or sexually explicit language.</li>
-    <li>Do not insult, bully, or demean others based on gender, race, religion, or background.</li>
-    <li>Do not engage in arguments or personal attacks during calls.</li>
-  </ul>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">🚫</div>
+                    <h2>2. No Inappropriate or Illegal Content</h2>
+                </div>
+                <p>Any activity or content that is illegal or inappropriate will result in immediate suspension or permanent ban.</p>
+                <ul>
+                    <li>No sexually suggestive, pornographic, or adult content.</li>
+                    <li>No sharing of illegal material or requests for such activity.</li>
+                    <li>No promoting or discussing violence, drugs, weapons, or self-harm.</li>
+                </ul>
+            </div>
 
-  <h2>2. No Inappropriate or Illegal Content</h2>
-  <p>Any activity or content that is illegal or inappropriate will result in immediate suspension or permanent ban.</p>
-  <ul>
-    <li>No sexually suggestive, pornographic, or adult content.</li>
-    <li>No sharing of illegal material or requests for such activity.</li>
-    <li>No promoting or discussing violence, drugs, weapons, or self-harm.</li>
-  </ul>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">🔒</div>
+                    <h2>3. Privacy and Consent</h2>
+                </div>
+                <p>Respect other users' privacy and boundaries.</p>
+                <ul>
+                    <li>Do not record or share conversations without explicit consent.</li>
+                    <li>Do not share others' personal details (phone number, address, social media, etc.) without permission.</li>
+                    <li>Report any suspicious or unsafe behavior immediately to our support team.</li>
+                </ul>
+            </div>
 
-  <h2>3. Privacy and Consent</h2>
-  <p>Respect other users’ privacy and boundaries.</p>
-  <ul>
-    <li>Do not record or share conversations without explicit consent.</li>
-    <li>Do not share others’ personal details (phone number, address, social media, etc.) without permission.</li>
-    <li>Report any suspicious or unsafe behavior immediately to our support team.</li>
-  </ul>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">⚖️</div>
+                    <h2>4. Fair Use of the Platform</h2>
+                </div>
+                <p>Use Vibzeo fairly and honestly.</p>
+                <ul>
+                    <li>Do not manipulate or cheat the coin system or earnings.</li>
+                    <li>Do not use fake profiles, bots, or multiple accounts for exploitation.</li>
+                    <li>Do not misuse payment features or attempt fraudulent transactions.</li>
+                </ul>
+            </div>
 
-  <h2>4. Fair Use of the Platform</h2>
-  <p>Use Vibzeo fairly and honestly.</p>
-  <ul>
-    <li>Do not manipulate or cheat the coin system or earnings.</li>
-    <li>Do not use fake profiles, bots, or multiple accounts for exploitation.</li>
-    <li>Do not misuse payment features or attempt fraudulent transactions.</li>
-  </ul>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">⭐</div>
+                    <h2>5. Hosts' Responsibilities</h2>
+                </div>
+                <p>Hosts represent the Vibzeo community and are expected to maintain professionalism and respect in all interactions.</p>
+                <ul>
+                    <li>Be polite, welcoming, and responsive to callers.</li>
+                    <li>Do not use Vibzeo for dating, solicitation, or adult entertainment purposes.</li>
+                    <li>Maintain a clean, noise-free, and distraction-free environment during calls.</li>
+                </ul>
+            </div>
 
-  <h2>5. Hosts’ Responsibilities</h2>
-  <p>Hosts represent the Vibzeo community and are expected to maintain professionalism and respect in all interactions.</p>
-  <ul>
-    <li>Be polite, welcoming, and responsive to callers.</li>
-    <li>Do not use Vibzeo for dating, solicitation, or adult entertainment purposes.</li>
-    <li>Maintain a clean, noise-free, and distraction-free environment during calls.</li>
-  </ul>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">🚨</div>
+                    <h2>6. Reporting Violations</h2>
+                </div>
+                <p>If you encounter a user who violates these guidelines, please report them through the app or contact our support team. We review all reports carefully and take appropriate action, which may include warnings, temporary suspensions, or permanent bans.</p>
+            </div>
 
-  <h2>6. Reporting Violations</h2>
-  <p>If you encounter a user who violates these guidelines, please report them through the app or contact our support team. We review all reports carefully and take appropriate action, which may include warnings, temporary suspensions, or permanent bans.</p>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">⚡</div>
+                    <h2>7. Enforcement</h2>
+                </div>
+                <p>Techzniczone reserves the right to monitor activity for safety and moderation purposes. Repeated or severe violations of these rules may result in loss of account, earnings, or access to the app.</p>
+            </div>
 
-  <h2>7. Enforcement</h2>
-  <p>Techzniczone reserves the right to monitor activity for safety and moderation purposes. Repeated or severe violations of these rules may result in loss of account, earnings, or access to the app.</p>
+            <div class="guideline-card">
+                <div class="guideline-header">
+                    <div class="guideline-icon">📝</div>
+                    <h2>8. Changes to These Guidelines</h2>
+                </div>
+                <p>We may update these guidelines from time to time to maintain a safe and respectful community. The latest version will always be available on this page.</p>
+            </div>
 
-  <h2>8. Changes to These Guidelines</h2>
-  <p>We may update these guidelines from time to time to maintain a safe and respectful community. The latest version will always be available on this page.</p>
+            <div class="contact-box">
+                <h2>📞 Contact Us</h2>
+                <p>If you have questions, feedback, or want to report a violation, please contact us at:</p>
+                <p style="margin-top: 20px;"><strong>Techzniczone</strong><br>
+                Bangalore, India<br>
+                Email: <a href="mailto:support@techzniczone.com">support@techzniczone.com</a></p>
+                <p style="margin-top: 25px; font-size: 1rem;">By using Vibzeo, you agree to follow these Community Guidelines and help us build a respectful and enjoyable communication platform for everyone.</p>
+            </div>
+        </div>
+    </section>
 
-  <h2>9. Contact Us</h2>
-  <p>If you have questions, feedback, or want to report a violation, please contact us at:</p>
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Vibzeo</h3>
+                <p>Premium voice calling platform for meaningful connections.</p>
+                <p style="margin-top: 15px;">Early Access Available<br>Play Store Coming Soon</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="index.html#download">Download App</a></p>
+                <p><a href="index.html#features">Features</a></p>
+                <p><a href="index.html#screenshots">Screenshots</a></p>
+                <p><a href="buy-coins.html">Buy Coins</a></p>
+                <p><a href="contact.html">Contact Us</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <p><a href="privacy-policy.html">Privacy Policy</a></p>
+                <p><a href="terms-of-service.html">Terms of Service</a></p>
+                <p><a href="community-guidelines.html">Community Guidelines</a></p>
+                <p><a href="refund-policy.html">Refund Policy</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <p>Follow us on social media for updates and announcements</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">📘</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="YouTube">📺</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p><strong>Techzniczone</strong> | 1st Floor, 677, 13th Cross, 27th Main Rd, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
+            <p>© 2025 Techzniczone. All rights reserved. Vibzeo is a registered trademark of Techzniczone.</p>
+            <p style="margin-top: 10px; font-size: 0.85rem;">This app is currently in early access. Official Google Play Store release coming soon.</p>
+        </div>
+    </footer>
 
-  <p><strong>Techzniczone</strong><br>
-  Bangalore, India<br>
-  Email: <a href="mailto:support@techzniczone.com">support@techzniczone.com</a></p>
+    <script>
+        function renderButtons() {
+            const token = localStorage.getItem('auth_token');
+            const username = localStorage.getItem('username');
+            const navAuthButtons = document.getElementById('navAuthButtons');
 
-  <p>By using Vibzeo, you agree to follow these Community Guidelines and help us build a respectful and enjoyable communication platform for everyone.</p>
+            if (token) {
+                navAuthButtons.innerHTML = `
+                    <div class="user-menu">
+                        <span>Hi, ${username || 'User'}</span>
+                        <a href="dashboard.html" style="color: #6366f1; font-weight: 600; margin-left: 10px;">Dashboard</a>
+                    </div>
+                `;
+            } else {
+                navAuthButtons.innerHTML = `
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                `;
+            }
+        }
 
+        renderButtons();
+    </script>
 </body>
+
 </html>

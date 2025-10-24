@@ -3,27 +3,200 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Vibezone Payment</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Payment - Vibzeo</title>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .payment-container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             text-align: center;
-            padding-top: 50px;
-            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .payment-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 30px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 15px;
         }
 
         .status {
-            font-size: 18px;
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .payment-details {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .success {
+            color: #10b981;
+        }
+
+        .error {
+            color: #ef4444;
+        }
+
+        .btn-back {
+            display: inline-block;
             margin-top: 20px;
+            padding: 12px 28px;
+            background: #6366f1;
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .payment-container {
+                padding: 40px 25px;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+
+            .icon {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h3>Processing your payment....</h3>
-    <div class="status" id="status">Please wait while we redirect you to the payment page.</div>
+    <div class="payment-container">
+        <div class="logo">Vibzeo</div>
+        
+        <div id="loadingSection">
+            <div class="loader"></div>
+            <h3>Processing Payment</h3>
+            <div class="status">Please wait while we redirect you to the secure payment gateway...</div>
+        </div>
+
+        <div id="statusSection" style="display: none;">
+            <div class="icon" id="statusIcon">⏳</div>
+            <h3 id="statusTitle">Processing...</h3>
+            <div class="status" id="statusMessage"></div>
+        </div>
+
+        <div id="paymentDetails" class="payment-details" style="display: none;">
+            <div class="detail-row">
+                <span class="detail-label">Username:</span>
+                <span class="detail-value" id="displayUsername">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Amount:</span>
+                <span class="detail-value" id="displayAmount">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Order ID:</span>
+                <span class="detail-value" id="displayOrderId" style="font-size: 0.8rem;">-</span>
+            </div>
+        </div>
+
+        <div id="backButton" style="display: none;">
+            <a href="buy-coins.html" class="btn-back">← Back to Buy Coins</a>
+        </div>
+    </div>
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
@@ -32,8 +205,31 @@
         const key = urlParams.get('key');
         const username = urlParams.get('username');
 
+        // Show payment details
+        if (username && amount && order_id) {
+            document.getElementById('displayUsername').textContent = username;
+            document.getElementById('displayAmount').textContent = '₹' + (parseInt(amount) / 100).toFixed(2);
+            document.getElementById('displayOrderId').textContent = order_id;
+        }
+
+        function updateStatus(icon, title, message, isError = false) {
+            document.getElementById('loadingSection').style.display = 'none';
+            document.getElementById('statusSection').style.display = 'block';
+            document.getElementById('paymentDetails').style.display = 'block';
+            document.getElementById('statusIcon').textContent = icon;
+            document.getElementById('statusTitle').textContent = title;
+            document.getElementById('statusMessage').textContent = message;
+            
+            if (isError) {
+                document.getElementById('statusTitle').classList.add('error');
+                document.getElementById('backButton').style.display = 'block';
+            } else {
+                document.getElementById('statusTitle').classList.add('success');
+            }
+        }
+
         if (!order_id || !amount || !key || !username) {
-            document.getElementById('status').innerText = "❌ Missing payment parameters.";
+            updateStatus('❌', 'Payment Failed', 'Missing payment parameters. Please try again.', true);
             throw new Error("Missing payment parameters");
         }
 
@@ -41,11 +237,11 @@
             key: key,
             amount: amount,
             currency: "INR",
-            name: "Vibezone",
+            name: "Vibzeo",
             description: "Coin Purchase",
             order_id: order_id,
             handler: function (response) {
-                document.getElementById('status').innerText = "✅ Payment successful. Confirming with server...";
+                updateStatus('⏳', 'Confirming Payment', 'Please wait while we verify your payment with the server...');
 
                 fetch("https://vibezone-backend.fly.dev/confirm-payment/", {
                     method: "POST",
@@ -63,29 +259,34 @@
                     .then(res => res.json())
                     .then(data => {
                         if (data.error) {
-                            document.getElementById('status').innerText = "❌ Server error: " + data.error;
+                            updateStatus('❌', 'Verification Failed', 'Server error: ' + data.error, true);
                         } else {
-                            document.getElementById('status').innerText = "✅ Coins added! Redirecting to dashboard...";
-                            window.location.href = `dashboard.html?username=${username}`;
+                            updateStatus('✅', 'Payment Successful!', 'Coins have been added to your account. Redirecting to dashboard...');
+                            setTimeout(() => {
+                                window.location.href = `dashboard.html?username=${username}`;
+                            }, 2000);
                         }
                     })
                     .catch(err => {
-                        document.getElementById('status').innerText = "❌ Failed to confirm payment.";
+                        updateStatus('❌', 'Confirmation Failed', 'Unable to confirm payment with server. Please contact support.', true);
                         console.error(err);
                     });
             },
             modal: {
                 ondismiss: function () {
-                    document.getElementById('status').innerText = "❌ Payment was cancelled.";
+                    updateStatus('⚠️', 'Payment Cancelled', 'You cancelled the payment. No charges were made.', true);
                 }
             },
             theme: {
-                color: "#FF9900"
+                color: "#6366f1"
             }
         };
 
-        const rzp = new Razorpay(options);
-        rzp.open();
+        // Open Razorpay after a short delay to show loading state
+        setTimeout(() => {
+            const rzp = new Razorpay(options);
+            rzp.open();
+        }, 500);
     </script>
 </body>
 

@@ -3,57 +3,331 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Logout | Vibezone</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - Vibzeo | Techzniczone</title>
+    
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding-top: 60px;
-            background: #f4f4f4;
+        /* Reset & Basic */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            color: #FF9900;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: #64748b;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 12px;
+        }
+
+        /* Main Content */
+        .logout-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .logout-card {
+            background: white;
+            border-radius: 24px;
+            padding: 60px 50px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logout-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 30px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .logout-card h1 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .logout-card p {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            margin: 30px auto;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #6366f1;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Message Styles */
+        .message {
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: 20px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 24px;
-            background-color: #FF9900;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
             cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
         }
 
-        .btn:hover {
-            background-color: #e88e00;
+        .btn-primary {
+            background: #6366f1;
+            color: white;
         }
 
-        .message {
-            margin-top: 20px;
-            color: green;
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
-        .error {
-            color: red;
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            color: #cbd5e1;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        footer p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logout-card {
+                padding: 40px 30px;
+            }
+
+            .logout-card h1 {
+                font-size: 1.6rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 
 <body>
-    <h1>Logging Out...</h1>
-    <p>Please wait while we log you out.</p>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo-section">
+            <div class="logo">Vibzeo</div>
+            <div class="logo-tagline">by Techzniczone</div>
+        </a>
+    </header>
 
-    <div class="message" id="logoutMessage"></div>
+    <!-- MAIN CONTENT -->
+    <div class="logout-container">
+        <div class="logout-card">
+            <div class="logout-icon">👋</div>
+            <h1 id="logoutTitle">Logging Out...</h1>
+            <p id="logoutDescription">Please wait while we securely log you out of your account.</p>
+            
+            <div id="spinnerContainer">
+                <div class="spinner"></div>
+            </div>
+
+            <div id="logoutMessage" class="hidden"></div>
+
+            <div id="buttonGroup" class="btn-group hidden">
+                <a href="index.html" class="btn btn-primary">
+                    🏠 Back to Home
+                </a>
+                <a href="login.html" class="btn btn-secondary">
+                    🔐 Login Again
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Techzniczone</strong> | 1st Floor, 677, 13th Cross, 27th Main Rd, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
+        <p>© 2025 Techzniczone. All rights reserved. Vibzeo is a registered trademark of Techzniczone.</p>
+    </footer>
 
     <script>
         async function logout() {
             const token = localStorage.getItem('auth_token');
+            const logoutMessage = document.getElementById('logoutMessage');
+            const spinnerContainer = document.getElementById('spinnerContainer');
+            const buttonGroup = document.getElementById('buttonGroup');
+            const logoutTitle = document.getElementById('logoutTitle');
+            const logoutDescription = document.getElementById('logoutDescription');
+
             if (!token) {
-                document.getElementById('logoutMessage').textContent = 'You are not logged in.';
+                spinnerContainer.classList.add('hidden');
+                logoutTitle.textContent = 'Not Logged In';
+                logoutDescription.textContent = 'You are not currently logged in to any account.';
+                logoutMessage.textContent = 'ℹ️ No active session found.';
+                logoutMessage.className = 'message info';
+                logoutMessage.classList.remove('hidden');
+                buttonGroup.classList.remove('hidden');
                 return;
             }
 
@@ -71,17 +345,34 @@
                 if (response.ok) {
                     localStorage.removeItem('auth_token');
                     localStorage.removeItem('username');
-                    document.getElementById('logoutMessage').textContent = 'Logged out successfully!';
+                    
+                    spinnerContainer.classList.add('hidden');
+                    logoutTitle.textContent = 'Logout Successful!';
+                    logoutDescription.textContent = 'You have been securely logged out of your account.';
+                    logoutMessage.textContent = '✅ Logged out successfully! Redirecting...';
+                    logoutMessage.className = 'message success';
+                    logoutMessage.classList.remove('hidden');
+                    
                     setTimeout(() => {
-                        window.location.href = 'index.html'; // Redirect to home page after logout
-                    }, 2000); // Wait for 2 seconds before redirect
+                        window.location.href = 'index.html';
+                    }, 2000);
                 } else {
-                    document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
-                    document.getElementById('logoutMessage').className = 'error';
+                    spinnerContainer.classList.add('hidden');
+                    logoutTitle.textContent = 'Logout Failed';
+                    logoutDescription.textContent = 'We encountered an issue while logging you out.';
+                    logoutMessage.textContent = '❌ ' + (data.message || 'Logout failed. Please try again.');
+                    logoutMessage.className = 'message error';
+                    logoutMessage.classList.remove('hidden');
+                    buttonGroup.classList.remove('hidden');
                 }
             } catch (error) {
-                document.getElementById('logoutMessage').textContent = 'Error: ' + error.message;
-                document.getElementById('logoutMessage').className = 'error';
+                spinnerContainer.classList.add('hidden');
+                logoutTitle.textContent = 'Connection Error';
+                logoutDescription.textContent = 'Unable to connect to the server.';
+                logoutMessage.textContent = '❌ Error: ' + error.message;
+                logoutMessage.className = 'message error';
+                logoutMessage.classList.remove('hidden');
+                buttonGroup.classList.remove('hidden');
             }
         }
 

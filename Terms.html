@@ -5,87 +5,562 @@
   <title>Terms of Service | Vibzeo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 40px auto;
-      line-height: 1.7;
-      padding: 20px;
-      color: #333;
-      background-color: #fafafa;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1, h2, h3 {
-      color: #222;
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+      background-color: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #6366f1;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-tagline {
+      font-size: 0.75rem;
+      color: #64748b;
+      border-left: 2px solid #e2e8f0;
+      padding-left: 12px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    nav a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #475569;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #6366f1;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path fill="rgba(255,255,255,0.05)" d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"></path></svg>') bottom center no-repeat;
+      background-size: cover;
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .effective-date {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      margin-top: 10px;
+    }
+
+    /* Intro Section */
+    .intro-section {
+      padding: 60px 5%;
+      background: #f8fafc;
+      text-align: center;
+    }
+
+    .intro-content {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .intro-content p {
+      color: #475569;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .intro-content strong {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 5%;
+    }
+
+    /* Section Styling */
+    .section {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      transition: all 0.3s;
+    }
+
+    .section:hover {
+      border-color: #6366f1;
+      box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      color: #1a1a1a;
+      margin-bottom: 25px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 45px;
+      height: 45px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      flex-shrink: 0;
+      padding: 0 12px;
+    }
+
+    .section p {
+      color: #64748b;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .section strong {
+      color: #1a1a1a;
+      font-weight: 600;
+    }
+
+    .section ul {
+      margin: 15px 0 20px 25px;
+      color: #64748b;
+    }
+
+    .section li {
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+      border-left: 4px solid #6366f1;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .highlight-box p {
+      margin-bottom: 10px;
+    }
+
+    .highlight-box strong {
+      color: #6366f1;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 80px 5%;
+      background: #f8fafc;
+      text-align: center;
+    }
+
+    .contact-box {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 50px 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-box h2 {
+      font-size: 2.5rem;
+      color: #1a1a1a;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .contact-box p {
+      color: #64748b;
+      font-size: 1.05rem;
+      margin-bottom: 25px;
+    }
+
+    .contact-info {
+      font-size: 1.1rem;
+      line-height: 2.5;
+      color: #475569;
+      margin: 30px 0;
+    }
+
+    .contact-info strong {
+      color: #1a1a1a;
+    }
+
+    .contact-icon {
+      font-size: 1.3rem;
+      margin-right: 8px;
+    }
+
+    .email-link {
+      display: inline-block;
+      padding: 16px 40px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: all 0.3s;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    .email-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 30px rgba(102, 126, 234, 0.5);
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 60px 5% 30px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 2;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: #6366f1;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #334155;
+      padding-top: 30px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom p {
+      margin-bottom: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .section {
+        padding: 25px;
+      }
+
+      .section h2 {
+        font-size: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-number {
+        margin-bottom: 10px;
+      }
+
+      .contact-box {
+        padding: 30px 20px;
+      }
+
+      .contact-box h2 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Terms of Service</h1>
-  <p><strong>Last updated:</strong> October 6, 2025</p>
+  <!-- Header -->
+  <header>
+    <div class="logo-section">
+      <div class="logo">Vibzeo</div>
+      <div class="logo-tagline">by Techzniczone</div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#about">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-  <p>Welcome to <strong>Vibzeo</strong>, a one-to-one audio calling platform developed and operated by <strong>Techzniczone</strong>, a registered software company based in Bangalore, India.</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Terms of Service</h1>
+      <div class="effective-date">Last Updated: October 6, 2025</div>
+    </div>
+  </section>
 
-  <p>These Terms of Service ("Terms") govern your access to and use of the Vibzeo mobile application and its related services ("Services"). By downloading, accessing, or using Vibzeo, you agree to comply with these Terms. If you do not agree, please do not use the app.</p>
+  <!-- Intro Section -->
+  <section class="intro-section">
+    <div class="intro-content">
+      <p>
+        Welcome to <strong>Vibzeo</strong>, a one-to-one audio calling platform developed and operated by <strong>Techzniczone</strong>, a registered software company based in Bangalore, India.
+      </p>
+      <p>
+        These Terms of Service ("Terms") govern your access to and use of the Vibzeo mobile application and its related services ("Services"). By downloading, accessing, or using Vibzeo, you agree to comply with these Terms. If you do not agree, please do not use the app.
+      </p>
+    </div>
+  </section>
 
-  <h2>1. Eligibility</h2>
-  <p>You must be at least 18 years of age to use Vibzeo. By creating an account, you confirm that you are legally capable of entering into binding agreements and that the information you provide is accurate and complete.</p>
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Section 1 -->
+    <div class="section">
+      <h2><span class="section-number">1</span> Eligibility</h2>
+      <p>You must be at least <strong>18 years of age</strong> to use Vibzeo. By creating an account, you confirm that you are legally capable of entering into binding agreements and that the information you provide is accurate and complete.</p>
+    </div>
 
-  <h2>2. Account Registration</h2>
-  <p>To access certain features of Vibzeo, you must create an account. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</p>
-  <p>Vibzeo reserves the right to suspend or terminate accounts that violate these Terms or misuse the platform.</p>
+    <!-- Section 2 -->
+    <div class="section">
+      <h2><span class="section-number">2</span> Account Registration</h2>
+      <p>To access certain features of Vibzeo, you must create an account. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</p>
+      <p>Vibzeo reserves the right to suspend or terminate accounts that violate these Terms or misuse the platform.</p>
+    </div>
 
-  <h2>3. Use of the Service</h2>
-  <p>Vibzeo enables users to engage in one-to-one audio calls using virtual coins. Users can purchase coins through the app and spend them during calls, while hosts can earn coins during their sessions.</p>
+    <!-- Section 3 -->
+    <div class="section">
+      <h2><span class="section-number">3</span> Use of the Service</h2>
+      <p>Vibzeo enables users to engage in one-to-one audio calls using virtual coins. Users can purchase coins through the app and spend them during calls, while hosts can earn coins during their sessions.</p>
+      <p>You agree to use the app only for lawful purposes and in a manner that does not harm, harass, or exploit others. The following activities are <strong>strictly prohibited:</strong></p>
+      <ul>
+        <li>Using the app for obscene, threatening, or fraudulent communication.</li>
+        <li>Attempting to record or distribute private calls without consent.</li>
+        <li>Reverse-engineering, modifying, or disrupting the app or its servers.</li>
+        <li>Using bots, scripts, or unauthorized tools to manipulate coins or user interactions.</li>
+      </ul>
+    </div>
 
-  <p>You agree to use the app only for lawful purposes and in a manner that does not harm, harass, or exploit others. The following activities are strictly prohibited:</p>
-  <ul>
-    <li>Using the app for obscene, threatening, or fraudulent communication.</li>
-    <li>Attempting to record or distribute private calls without consent.</li>
-    <li>Reverse-engineering, modifying, or disrupting the app or its servers.</li>
-    <li>Using bots, scripts, or unauthorized tools to manipulate coins or user interactions.</li>
-  </ul>
+    <!-- Section 4 -->
+    <div class="section">
+      <h2><span class="section-number">4</span> Virtual Coins and Earnings</h2>
+      <div class="highlight-box">
+        <p><strong>Coin Purchases:</strong> Users may purchase virtual coins through supported payment gateways. These purchases are processed securely through third-party services.</p>
+        <p><strong>Refund Policy:</strong> All coin purchases are final and non-refundable, except where required by law or explicitly allowed by Techzniczone.</p>
+        <p><strong>Earnings for Hosts:</strong> Hosts may earn coins during calls. The conversion of coins to rewards or payouts, if available, will be governed by the policies announced by Vibzeo from time to time.</p>
+      </div>
+      <p>Techzniczone reserves the right to modify pricing, coin values, or earning rules at any time with prior notice inside the app or on the website.</p>
+    </div>
 
-  <h2>4. Virtual Coins and Earnings</h2>
-  <p><strong>Coin Purchases:</strong> Users may purchase virtual coins through supported payment gateways. These purchases are processed securely through third-party services.</p>
-  <p><strong>Refund Policy:</strong> All coin purchases are final and non-refundable, except where required by law or explicitly allowed by Techzniczone.</p>
-  <p><strong>Earnings for Hosts:</strong> Hosts may earn coins during calls. The conversion of coins to rewards or payouts, if available, will be governed by the policies announced by Vibzeo from time to time.</p>
-  <p>Techzniczone reserves the right to modify pricing, coin values, or earning rules at any time with prior notice inside the app or on the website.</p>
+    <!-- Section 5 -->
+    <div class="section">
+      <h2><span class="section-number">5</span> Intellectual Property</h2>
+      <p>All content, branding, software, design, and materials within Vibzeo are the intellectual property of Techzniczone or its licensors. Users are granted a limited, non-transferable, non-exclusive license to use the app solely for personal purposes.</p>
+      <p>Unauthorized copying, reproduction, or distribution of Vibzeo materials is prohibited.</p>
+    </div>
 
-  <h2>5. Intellectual Property</h2>
-  <p>All content, branding, software, design, and materials within Vibzeo are the intellectual property of Techzniczone or its licensors. Users are granted a limited, non-transferable, non-exclusive license to use the app solely for personal purposes.</p>
-  <p>Unauthorized copying, reproduction, or distribution of Vibzeo materials is prohibited.</p>
+    <!-- Section 6 -->
+    <div class="section">
+      <h2><span class="section-number">6</span> User Content and Conduct</h2>
+      <p>During audio interactions, users are solely responsible for their behavior and communication. Vibzeo does not monitor or record calls by default but may investigate complaints or misuse in accordance with the Privacy Policy.</p>
+      <p>Techzniczone reserves the right to suspend or remove users involved in harassment, abuse, or illegal activity.</p>
+    </div>
 
-  <h2>6. User Content and Conduct</h2>
-  <p>During audio interactions, users are solely responsible for their behavior and communication. Vibzeo does not monitor or record calls by default but may investigate complaints or misuse in accordance with the Privacy Policy.</p>
-  <p>Techzniczone reserves the right to suspend or remove users involved in harassment, abuse, or illegal activity.</p>
+    <!-- Section 7 -->
+    <div class="section">
+      <h2><span class="section-number">7</span> Payments and Third-Party Services</h2>
+      <p>All financial transactions, including coin purchases, are handled by third-party payment processors. Vibzeo does not store sensitive payment data such as card numbers. By using our payment services, you also agree to the respective terms of those payment providers.</p>
+    </div>
 
-  <h2>7. Payments and Third-Party Services</h2>
-  <p>All financial transactions, including coin purchases, are handled by third-party payment processors. Vibzeo does not store sensitive payment data such as card numbers. By using our payment services, you also agree to the respective terms of those payment providers.</p>
+    <!-- Section 8 -->
+    <div class="section">
+      <h2><span class="section-number">8</span> Termination</h2>
+      <p>We may suspend or terminate your account or restrict access to Vibzeo if we believe you have violated these Terms or engaged in any harmful or fraudulent behavior.</p>
+      <p>You may stop using Vibzeo at any time by deleting your account. Upon termination, any unused coins or rewards may be forfeited unless otherwise required by law.</p>
+    </div>
 
-  <h2>8. Termination</h2>
-  <p>We may suspend or terminate your account or restrict access to Vibzeo if we believe you have violated these Terms or engaged in any harmful or fraudulent behavior.</p>
-  <p>You may stop using Vibzeo at any time by deleting your account. Upon termination, any unused coins or rewards may be forfeited unless otherwise required by law.</p>
+    <!-- Section 9 -->
+    <div class="section">
+      <h2><span class="section-number">9</span> Disclaimer of Warranties</h2>
+      <p>Vibzeo is provided "as is" and "as available." Techzniczone makes no warranties, express or implied, regarding the reliability, security, or performance of the app. Use of the app is at your own risk.</p>
+    </div>
 
-  <h2>9. Disclaimer of Warranties</h2>
-  <p>Vibzeo is provided “as is” and “as available.” Techzniczone makes no warranties, express or implied, regarding the reliability, security, or performance of the app. Use of the app is at your own risk.</p>
+    <!-- Section 10 -->
+    <div class="section">
+      <h2><span class="section-number">10</span> Limitation of Liability</h2>
+      <p>To the maximum extent permitted by law, Techzniczone shall not be liable for any indirect, incidental, or consequential damages resulting from your use of Vibzeo, including loss of data, revenue, or profits.</p>
+    </div>
 
-  <h2>10. Limitation of Liability</h2>
-  <p>To the maximum extent permitted by law, Techzniczone shall not be liable for any indirect, incidental, or consequential damages resulting from your use of Vibzeo, including loss of data, revenue, or profits.</p>
+    <!-- Section 11 -->
+    <div class="section">
+      <h2><span class="section-number">11</span> Changes to Terms</h2>
+      <p>Techzniczone may update or modify these Terms from time to time. The latest version will always be available on our website and within the app. Continued use of Vibzeo after such changes constitutes acceptance of the revised Terms.</p>
+    </div>
 
-  <h2>11. Changes to Terms</h2>
-  <p>Techzniczone may update or modify these Terms from time to time. The latest version will always be available on our website and within the app. Continued use of Vibzeo after such changes constitutes acceptance of the revised Terms.</p>
+    <!-- Section 12 -->
+    <div class="section">
+      <h2><span class="section-number">12</span> Governing Law</h2>
+      <p>These Terms shall be governed by and interpreted in accordance with the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Bangalore, India.</p>
+    </div>
+  </div>
 
-  <h2>12. Governing Law</h2>
-  <p>These Terms shall be governed by and interpreted in accordance with the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Bangalore, India.</p>
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-box">
+      <h2>Contact Us</h2>
+      <p>If you have any questions or concerns about these Terms, please contact us:</p>
+      <div class="contact-info">
+        <div><span class="contact-icon">📧</span><strong>Email:</strong> support@techzniczone.com</div>
+        <div><span class="contact-icon">🏢</span><strong>Company:</strong> Techzniczone, Bangalore, India</div>
+      </div>
+      <a href="mailto:support@techzniczone.com" class="email-link">Email Support</a>
+      <p style="margin-top: 30px; font-size: 0.95rem; color: #64748b;">
+        By using Vibzeo, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
+      </p>
+    </div>
+  </section>
 
-  <h2>13. Contact Us</h2>
-  <p>If you have any questions or concerns about these Terms, please contact us at:</p>
-
-  <p><strong>Techzniczone</strong><br>
-  Bangalore, India<br>
-  Email: <a href="mailto:support@techzniczone.com">support@techzniczone.com</a></p>
-
-  <p>By using Vibzeo, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
-
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Vibzeo</h3>
+        <p>Premium voice calling platform for meaningful connections.</p>
+        <p style="margin-top: 15px;">Early Access Available<br>Play Store Coming Soon</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="index.html#features">Features</a></p>
+        <p><a href="index.html#screenshots">Screenshots</a></p>
+        <p><a href="buy-coins.html">Buy Coins</a></p>
+        <p><a href="contact.html">Contact Us</a></p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <p><a href="privacy-policy.html">Privacy Policy</a></p>
+        <p><a href="terms-of-service.html">Terms of Service</a></p>
+        <p><a href="community-guidelines.html">Community Guidelines</a></p>
+        <p><a href="refund-policy.html">Refund Policy</a></p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <p>Follow us on social media for updates and announcements</p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p><strong>Techzniczone</strong> | 1st Floor, 677, 13th Cross, 27th Main Rd, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102</p>
+      <p>© 2025 Techzniczone. All rights reserved. Vibzeo is a registered trademark of Techzniczone.</p>
+    </div>
+  </footer>
 </body>
 </html>
