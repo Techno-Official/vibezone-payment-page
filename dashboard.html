@@ -1,15 +1,559 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Vibzeo | Your Account</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Manage your Vibzeo account, check your coin balance, and access premium features.">
+    
+    <style>
+        /* Reset & Basic */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: #64748b;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #6366f1;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .btn-logout {
+            background: #ef4444;
+            padding: 8px 16px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-logout:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 40px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .dashboard-header {
+            margin-bottom: 40px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .welcome-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .welcome-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            border-color: #6366f1;
+        }
+
+        .stat-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1;
+        }
+
+        .stat-subtext {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: 8px;
+            height: 2.5rem;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px 32px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            flex: 1;
+            min-width: 200px;
+            padding: 16px 32px;
+            background: white;
+            color: #6366f1;
+            border: 2px solid #6366f1;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .info-section h2 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 1rem;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .feature-content p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .alert {
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 2px solid #93c5fd;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #dc2626;
+            border: 2px solid #fecaca;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 40px 5% 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #6366f1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            header {
+                justify-content: center;
+            }
+
+            .welcome-section h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Welcome, <span id="user"></span></h2>
-    <p>Wallet Balance: <span id="wallet">...</span> coins</p>
-    <button onclick="location.href='buy-coins.html'">Buy Coins</button>
-    <button onclick="logoutUser()">Logout</button>
+    <!-- HEADER -->
+    <header>
+        <div class="logo-section">
+            <a href="index.html" class="logo">Vibzeo</a>
+            <div class="logo-tagline">by Techzniczone</div>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="buy-coins.html">Buy Coins</a>
+            <a href="index.html#about">About</a>
+            <div class="user-menu">
+                <span id="navUsername">User</span>
+                <button class="btn-logout" onclick="logoutUser()">Logout</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="dashboard-header">
+            <div class="welcome-section">
+                <h1>Welcome back, <span id="user">Loading...</span>! 👋</h1>
+                <p>Here's an overview of your Vibzeo account</p>
+            </div>
+
+            <div id="alertContainer"></div>
+
+            <div class="dashboard-grid">
+                <!-- Wallet Balance Card -->
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">💎</div>
+                    </div>
+                    <div class="stat-label">Wallet Balance</div>
+                    <div class="stat-value" id="wallet">
+                        <div class="loading-skeleton"></div>
+                    </div>
+                    <div class="stat-subtext">Vibzeo Coins</div>
+                </div>
+
+                <!-- Account Status Card -->
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">✅</div>
+                    </div>
+                    <div class="stat-label">Account Status</div>
+                    <div class="stat-value" style="font-size: 1.8rem; color: #10b981;">Active</div>
+                    <div class="stat-subtext">Your account is in good standing</div>
+                </div>
+
+                <!-- Member Since Card -->
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <div class="stat-icon">📅</div>
+                    </div>
+                    <div class="stat-label">Member Since</div>
+                    <div class="stat-value" style="font-size: 1.5rem;" id="memberSince">2025</div>
+                    <div class="stat-subtext">Thank you for being with us!</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn-primary" onclick="location.href='buy-coins.html'">
+                    💰 Buy More Coins
+                </button>
+                <button class="btn-secondary" onclick="location.href='index.html#features'">
+                    ✨ Explore Features
+                </button>
+            </div>
+        </div>
+
+        <!-- Quick Actions Section -->
+        <div class="info-section">
+            <h2>What You Can Do</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">🎙️</div>
+                    <div class="feature-content">
+                        <h3>Make Calls</h3>
+                        <p>Connect with friends through HD voice calls</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💎</div>
+                    <div class="feature-content">
+                        <h3>Use Premium Features</h3>
+                        <p>Access exclusive features with your coins</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎁</div>
+                    <div class="feature-content">
+                        <h3>Send Gifts</h3>
+                        <p>Show appreciation to other users</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-content">
+                        <h3>Track Activity</h3>
+                        <p>Monitor your usage and earnings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Vibzeo</h3>
+                <p>Premium voice calling platform for meaningful connections.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="dashboard.html">Dashboard</a></p>
+                <p><a href="buy-coins.html">Buy Coins</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <p><a href="privacy-policy.html">Privacy Policy</a></p>
+                <p><a href="terms-of-service.html">Terms of Service</a></p>
+                <p><a href="refund-policy.html">Refund Policy</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Company</h3>
+                <p>Techzniczone<br>HSR Layout, Bengaluru</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Techzniczone. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
         // Restore username from URL if needed
@@ -17,36 +561,111 @@
         const usernameFromURL = params.get("username");
         if (usernameFromURL) {
             localStorage.setItem("username", usernameFromURL);
-            window.history.replaceState({}, document.title, window.location.pathname); // clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
         }
-    </script>
 
-    <script src="js/user.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/auth.js"></script>
+        // Get username from localStorage
+        function getUsername() {
+            return localStorage.getItem("username");
+        }
 
-    <script>
-        checkAuth();
-        const username = getUsername();
-        document.getElementById('user').innerText = username;
+        // Check authentication
+        function checkAuth() {
+            const token = localStorage.getItem("auth_token");
+            const username = getUsername();
+            
+            if (!token || !username) {
+                window.location.href = "login.html";
+                return false;
+            }
+            return true;
+        }
 
-        if (!username) {
-            document.getElementById('wallet').innerText = "Username not found";
-        } else {
-            // Fetch wallet balance using public endpoint
+        // Logout function
+        async function logoutUser() {
+            const token = localStorage.getItem('auth_token');
+            
+            try {
+                if (token) {
+                    await fetch('https://vibezone-backend.fly.dev/api/website-logout/', {
+                        method: 'POST',
+                        headers: { 'Authorization': `Token ${token}` }
+                    });
+                }
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+            
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        // Initialize dashboard
+        function initDashboard() {
+            if (!checkAuth()) return;
+
+            const username = getUsername();
+            document.getElementById('user').innerText = username;
+            document.getElementById('navUsername').innerText = username;
+
+            // Set member since year
+            document.getElementById('memberSince').innerText = new Date().getFullYear();
+
+            if (!username) {
+                showAlert("Username not found. Please login again.", "error");
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 2000);
+                return;
+            }
+
+            // Fetch wallet balance
             fetch(`https://vibezone-backend.fly.dev/api/get-wallet-balance-public/?username=${encodeURIComponent(username)}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success && data.data && typeof data.data.balance !== "undefined") {
-                        document.getElementById('wallet').innerText = data.data.balance;
+                        document.getElementById('wallet').innerHTML = `
+                            <span style="display: flex; align-items: baseline; gap: 5px;">
+                                ${data.data.balance}
+                                <span style="font-size: 1rem; color: #64748b;">coins</span>
+                            </span>
+                        `;
                     } else {
-                        document.getElementById('wallet').innerText = "Error loading balance";
+                        document.getElementById('wallet').innerHTML = `
+                            <span style="font-size: 1.2rem; color: #ef4444;">Error</span>
+                        `;
+                        showAlert("Unable to load wallet balance. Please try again later.", "error");
                     }
                 })
-                .catch(() => {
-                    document.getElementById('wallet').innerText = "Error loading balance";
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    document.getElementById('wallet').innerHTML = `
+                        <span style="font-size: 1.2rem; color: #ef4444;">Error</span>
+                    `;
+                    showAlert("Network error while loading balance. Please check your connection.", "error");
                 });
         }
+
+        function showAlert(message, type = "info") {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertClass = type === "error" ? "alert-error" : "alert-info";
+            const icon = type === "error" ? "❌" : "ℹ️";
+            
+            alertContainer.innerHTML = `
+                <div class="alert ${alertClass}">
+                    <span>${icon}</span>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                alertContainer.innerHTML = '';
+            }, 5000);
+        }
+
+        // Initialize on page load
+        initDashboard();
     </script>
 </body>
 

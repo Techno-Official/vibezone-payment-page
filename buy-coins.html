@@ -3,106 +3,694 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Buy Coins - Vibezone</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Coins - Vibzeo | Premium Features</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Purchase Vibzeo Coins to unlock premium features and enhance your voice calling experience.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Buy Coins - Vibzeo">
+    <meta property="og:description" content="Get Vibzeo Coins and unlock premium features for the best calling experience.">
+    <meta property="og:type" content="website">
+    
     <style>
+        /* Reset & Basic */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            padding: 30px;
-            background: #fff8f0;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        h2 {
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #6366f1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-tagline {
+            font-size: 0.75rem;
+            color: #64748b;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 12px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #475569;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #6366f1;
+        }
+
+        .nav-auth {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: 10px;
+        }
+
+        .btn-login {
+            color: #6366f1;
+            font-weight: 600;
+            padding: 8px 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-login:hover {
+            background: #f1f5f9;
+            border-radius: 6px;
+        }
+
+        .btn-signup {
+            background: #6366f1;
+            padding: 10px 24px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-signup:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .btn-logout {
+            background: #ef4444;
+            padding: 8px 16px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .btn-logout:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 5% 40px;
             text-align: center;
-            color: #ff6600;
         }
 
-        .grid {
+        .hero-section h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 60px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .benefits-section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .benefits-section h2 {
+            font-size: 1.8rem;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
         }
 
-        .coin-box {
-            background: #ffe0b3;
-            border: 2px solid #ffa31a;
-            border-radius: 12px;
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
             padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .benefit-content h3 {
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .benefit-content p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .pricing-header h2 {
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .pricing-header p {
+            font-size: 1.05rem;
+            color: #64748b;
+        }
+
+        .coin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .coin-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: all 0.3s;
+            border: 3px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .coin-box:hover {
-            transform: scale(1.05);
+        .coin-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .coin-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .coin-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            border-color: #6366f1;
+        }
+
+        .coin-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
         }
 
         .coin-amount {
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
             margin-bottom: 10px;
         }
 
+        .coin-label {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
         .price {
-            font-size: 16px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 20px;
+        }
+
+        .price-note {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+
+        .buy-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            color: white;
+            padding: 5px 45px;
+            transform: rotate(45deg);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         #status {
-            margin-top: 20px;
             text-align: center;
+            margin: 30px 0;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            display: none;
+        }
+
+        #status.loading {
+            display: block;
+            background: #dbeafe;
+            color: #1e40af;
+            border: 2px solid #93c5fd;
+        }
+
+        #status.error {
+            display: block;
+            background: #fee2e2;
+            color: #dc2626;
+            border: 2px solid #fecaca;
+        }
+
+        #status.success {
+            display: block;
+            background: #dcfce7;
+            color: #16a34a;
+            border: 2px solid #bbf7d0;
+        }
+
+        .secure-payment {
+            text-align: center;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .secure-payment-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .payment-icon {
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 40px 5% 20px;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #6366f1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+
+            header {
+                justify-content: center;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .coin-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto 40px;
+            }
+
+            .benefits-section {
+                padding: 25px;
+            }
+
+            .pricing-header h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
-    <script src="auth.js"></script> <!-- assumes you already have login token storage -->
 </head>
 
 <body>
-    <h2>Buy Coins</h2>
-    <div class="grid" id="coinGrid"></div>
-    <div id="status"></div>
+    <!-- HEADER -->
+    <header>
+        <div class="logo-section">
+            <a href="index.html" class="logo">Vibzeo</a>
+            <div class="logo-tagline">by Techzniczone</div>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#features">Features</a>
+            <a href="index.html#about">About</a>
+            <a href="buy-coins.html">Buy Coins</a>
+            <div id="navAuthButtons" class="nav-auth"></div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+        <h1>💎 Buy Vibzeo Coins</h1>
+        <p>Unlock premium features and enhance your calling experience with Vibzeo Coins</p>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <!-- Benefits Section -->
+        <section class="benefits-section">
+            <h2>What You Can Do With Coins</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎙️</div>
+                    <div class="benefit-content">
+                        <h3>Premium Calls</h3>
+                        <p>Access high-quality voice calls with enhanced features</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">⭐</div>
+                    <div class="benefit-content">
+                        <h3>Special Features</h3>
+                        <p>Unlock exclusive features and customization options</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎁</div>
+                    <div class="benefit-content">
+                        <h3>Send Gifts</h3>
+                        <p>Show appreciation by sending virtual gifts to others</p>
+                    </div>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚀</div>
+                    <div class="benefit-content">
+                        <h3>Priority Support</h3>
+                        <p>Get faster support and priority access to new features</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section">
+            <div class="pricing-header">
+                <h2>Choose Your Coin Package</h2>
+                <p>Select the package that best fits your needs</p>
+            </div>
+
+            <div id="status"></div>
+
+            <div class="coin-grid" id="coinGrid"></div>
+
+            <div class="secure-payment">
+                <p style="color: #64748b; font-weight: 600; margin-bottom: 10px;">🔒 Secure Payment Powered by Razorpay</p>
+                <p style="color: #94a3b8; font-size: 0.9rem;">Your payment information is encrypted and secure</p>
+                <div class="secure-payment-icons">
+                    <span class="payment-icon">💳</span>
+                    <span class="payment-icon">🏦</span>
+                    <span class="payment-icon">📱</span>
+                    <span class="payment-icon">🔐</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Vibzeo</h3>
+                <p>Premium voice calling platform for meaningful connections.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="index.html#features">Features</a></p>
+                <p><a href="buy-coins.html">Buy Coins</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <p><a href="privacy-policy.html">Privacy Policy</a></p>
+                <p><a href="terms-of-service.html">Terms of Service</a></p>
+                <p><a href="refund-policy.html">Refund Policy</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Company</h3>
+                <p>Techzniczone<br>HSR Layout, Bengaluru</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 Techzniczone. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
+        // Render auth buttons
+        function renderButtons() {
+            const token = localStorage.getItem('auth_token');
+            const username = localStorage.getItem('username');
+            const navAuthButtons = document.getElementById('navAuthButtons');
+
+            if (token) {
+                navAuthButtons.innerHTML = `
+                    <div class="user-menu">
+                        <span>Hi, ${username || 'User'}</span>
+                        <button class="btn-logout" onclick="logout()">Logout</button>
+                    </div>
+                `;
+            } else {
+                navAuthButtons.innerHTML = `
+                    <a href="login.html" class="btn-login">Login</a>
+                    <a href="signup.html" class="btn-signup">Sign Up</a>
+                `;
+            }
+        }
+
+        async function logout() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) return;
+
+            try {
+                await fetch('https://vibezone-backend.fly.dev/api/website-logout/', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Token ${token}` }
+                });
+                localStorage.clear();
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+            }
+        }
+
+        renderButtons();
+
+        // Coin packages
         const websitePrices = [
-            { coins: 100, price: 100 },
-            { coins: 200, price: 200 },
-            { coins: 300, price: 300 },
-            { coins: 400, price: 400 },
+            { coins: 100, price: 100, popular: false },
+            { coins: 200, price: 200, popular: true },
+            { coins: 300, price: 300, popular: false },
+            { coins: 400, price: 400, popular: false },
         ];
 
         const grid = document.getElementById("coinGrid");
         const status = document.getElementById("status");
 
         websitePrices.forEach((item) => {
-            const box = document.createElement("div");
-            box.className = "coin-box";
-            box.innerHTML = `
-                <div class="coin-amount">${item.coins} Coins</div>
+            const card = document.createElement("div");
+            card.className = "coin-card";
+            card.innerHTML = `
+                ${item.popular ? '<div class="popular-badge">POPULAR</div>' : ''}
+                <div class="coin-icon">💎</div>
+                <div class="coin-amount">${item.coins}</div>
+                <div class="coin-label">Vibzeo Coins</div>
                 <div class="price">₹${item.price}</div>
+                <div class="price-note">One-time purchase</div>
+                <button class="buy-btn">Buy Now</button>
             `;
-            //box.onclick = () => startPayment(item.price);
-            box.onclick = () => startPayment(item.price * 100);  // Pass paise to backend/Razorpay
-            grid.appendChild(box);
+            card.onclick = () => startPayment(item.price * 100);
+            grid.appendChild(card);
         });
 
         async function startPayment(amount) {
-            status.innerText = "⏳ Creating Razorpay order...";
             const username = localStorage.getItem("username");
 
             if (!username) {
-                status.innerText = "❌ User not logged in.";
+                status.className = 'error';
+                status.innerText = "❌ Please login to purchase coins";
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
                 return;
             }
+
+            status.className = 'loading';
+            status.innerText = "⏳ Creating secure payment order...";
 
             try {
                 const response = await fetch("https://vibezone-backend.fly.dev/create-order/", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ amount, username }) // ✅ Send username to backend
+                    body: JSON.stringify({ amount, username })
                 });
 
                 if (!response.ok) {
-                    status.innerText = "❌ Failed to create Razorpay order.";
+                    status.className = 'error';
+                    status.innerText = "❌ Failed to create payment order. Please try again.";
                     return;
                 }
 
@@ -111,15 +699,21 @@
                 const key = data.key;
 
                 if (!key || !orderId) {
-                    status.innerText = "❌ Razorpay key or order ID missing.";
+                    status.className = 'error';
+                    status.innerText = "❌ Payment configuration error. Please contact support.";
                     return;
                 }
 
                 const checkoutUrl = `websitecheckout.html?order_id=${orderId}&amount=${amount}&key=${key}&username=${encodeURIComponent(username)}`;
-                status.innerText = "✅ Redirecting to payment page...";
-                window.location.href = checkoutUrl;
+                status.className = 'success';
+                status.innerText = "✅ Redirecting to secure payment page...";
+                
+                setTimeout(() => {
+                    window.location.href = checkoutUrl;
+                }, 1000);
             } catch (e) {
-                status.innerText = "❌ Error starting payment.";
+                status.className = 'error';
+                status.innerText = "❌ Network error. Please check your connection and try again.";
                 console.error(e);
             }
         }
