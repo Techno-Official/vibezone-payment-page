@@ -580,6 +580,7 @@
             <a href="#screenshots">Screenshots</a>
             <a href="#about">About</a>
             <a href="buy-coins.html">Buy Coins</a>
+            <a href="dashboard.html" id="dashboardLink" style="display: none;">Dashboard</a>
             <div id="navAuthButtons" class="nav-auth"></div>
         </nav>
     </header>
@@ -752,8 +753,14 @@
             const token = localStorage.getItem('auth_token');
             const username = localStorage.getItem('username');
             const navAuthButtons = document.getElementById('navAuthButtons');
+            const dashboardLink = document.getElementById('dashboardLink');
 
             if (token) {
+                // Show dashboard link when logged in
+                if (dashboardLink) {
+                    dashboardLink.style.display = 'block';
+                }
+                
                 navAuthButtons.innerHTML = `
                     <div class="user-menu">
                         <span>Hi, ${username || 'User'}</span>
@@ -761,6 +768,11 @@
                     </div>
                 `;
             } else {
+                // Hide dashboard link when logged out
+                if (dashboardLink) {
+                    dashboardLink.style.display = 'none';
+                }
+                
                 navAuthButtons.innerHTML = `
                     <a href="login.html" class="btn-login">Login</a>
                     <a href="signup.html" class="btn-signup">Sign Up</a>
