@@ -252,7 +252,7 @@
                         payment_id: response.razorpay_payment_id,
                         order_id: response.razorpay_order_id,
                         signature: response.razorpay_signature,
-                        amount: amount,
+                        amount: parseInt(amount) * 100,  // ✅ convert rupees → paise
                         username: username
                     })
                 })
