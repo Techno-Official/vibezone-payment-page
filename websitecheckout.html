@@ -201,14 +201,20 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const order_id = urlParams.get('order_id');
-        const amount = urlParams.get('amount');
         const key = urlParams.get('key');
         const username = urlParams.get('username');
+
+        // ✅ Fix: ensure amount is always in paise
+        let amount = parseInt(urlParams.get('amount'));
+        if (amount < 100) {
+            // If less than ₹1 (i.e., in rupees), convert to paise
+            amount = amount * 100;
+        }
 
         // Show payment details
         if (username && amount && order_id) {
             document.getElementById('displayUsername').textContent = username;
-            document.getElementById('displayAmount').textContent = '₹' + (parseInt(amount) / 100).toFixed(2);
+            document.getElementById('displayAmount').textContent = '₹' + (amount / 100).toFixed(2);
             document.getElementById('displayOrderId').textContent = order_id;
         }
 
@@ -235,7 +241,7 @@
 
         const options = {
             key: key,
-            amount: amount,
+            amount: amount, // ✅ Correct amount in paise
             currency: "INR",
             name: "Vibzeo",
             description: "Coin Purchase",
@@ -252,26 +258,25 @@
                         payment_id: response.razorpay_payment_id,
                         order_id: response.razorpay_order_id,
                         signature: response.razorpay_signature,
-                        
-                        amount: parseInt(amount),  // ✅ fixed here
+                        amount: Number(amount),  // ✅ send correct amount in paise
                         username: username
                     })
                 })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.error) {
-                            updateStatus('❌', 'Verification Failed', 'Server error: ' + data.error, true);
-                        } else {
-                            updateStatus('✅', 'Payment Successful!', 'Coins have been added to your account. Redirecting to dashboard...');
-                            setTimeout(() => {
-                                window.location.href = `dashboard.html?username=${username}`;
-                            }, 2000);
-                        }
-                    })
-                    .catch(err => {
-                        updateStatus('❌', 'Confirmation Failed', 'Unable to confirm payment with server. Please contact support.', true);
-                        console.error(err);
-                    });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        updateStatus('❌', 'Verification Failed', 'Server error: ' + data.error, true);
+                    } else {
+                        updateStatus('✅', 'Payment Successful!', 'Coins have been added to your account. Redirecting to dashboard...');
+                        setTimeout(() => {
+                            window.location.href = `dashboard.html?username=${username}`;
+                        }, 2000);
+                    }
+                })
+                .catch(err => {
+                    updateStatus('❌', 'Confirmation Failed', 'Unable to confirm payment with server. Please contact support.', true);
+                    console.error(err);
+                });
             },
             modal: {
                 ondismiss: function () {
@@ -283,7 +288,7 @@
             }
         };
 
-        // Open Razorpay after a short delay to show loading state
+        // Open Razorpay after short delay
         setTimeout(() => {
             const rzp = new Razorpay(options);
             rzp.open();
