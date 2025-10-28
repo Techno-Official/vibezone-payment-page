@@ -204,12 +204,9 @@
         const key = urlParams.get('key');
         const username = urlParams.get('username');
 
-        // ✅ Fix: ensure amount is always in paise
-        let amount = parseInt(urlParams.get('amount'));
-        if (amount < 100) {
-            // If less than ₹1 (i.e., in rupees), convert to paise
-            amount = amount * 100;
-        }
+        // Always treat the incoming amount as rupees and convert to paise
+        let amount = parseInt(urlParams.get('amount')) * 100;
+        
 
         // Show payment details
         if (username && amount && order_id) {
