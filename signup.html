@@ -257,6 +257,28 @@
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
 
+        .form-group input.error {
+            border-color: #dc2626;
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .password-requirements {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+
         .checkbox-group {
             display: flex;
             align-items: center;
@@ -458,20 +480,26 @@
 
                 <div id="message"></div>
 
-                <form id="signupForm">
+                <form id="signupForm" novalidate>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Choose a username" required />
+                        <input type="text" id="username" name="username" placeholder="Choose a username" required maxlength="20" />
+                        <div class="error-message" id="usernameError"></div>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" placeholder="your@email.com" required />
+                        <div class="error-message" id="emailError"></div>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" id="password" name="password" placeholder="Create a strong password" required />
+                        <div class="error-message" id="passwordError"></div>
+                        <div class="password-requirements">
+                            Password must be at least 8 characters with uppercase, lowercase, and numbers
+                        </div>
                     </div>
 
                     <div class="checkbox-group">
@@ -519,20 +547,177 @@
     </footer>
 
     <script>
+        // Validation functions matching Android app
+        function validateUsername(username) {
+            const trimmed = username.trim();
+            
+            if (trimmed.length === 0) {
+                return 'Username is required';
+            }
+            
+            if (trimmed.length < 3) {
+                return 'Username must be at least 3 characters';
+            }
+            
+            if (trimmed.length > 20) {
+                return 'Username must be less than 20 characters';
+            }
+            
+            if (!/^[a-zA-Z0-9_]+$/.test(trimmed)) {
+                return 'Username can only contain letters, numbers, and underscores';
+            }
+            
+            return null;
+        }
+
+        function validateEmail(email) {
+            const trimmed = email.trim();
+            
+            if (trimmed.length === 0) {
+                return 'Email is required';
+            }
+            
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+            if (!emailRegex.test(trimmed)) {
+                return 'Please enter a valid email address';
+            }
+            
+            return null;
+        }
+
+        function validatePassword(password) {
+            if (password.length === 0) {
+                return 'Password is required';
+            }
+            
+            if (password.length < 8) {
+                return 'Password must be at least 8 characters';
+            }
+            
+            if (!/[A-Z]/.test(password)) {
+                return 'Password must contain at least one uppercase letter';
+            }
+            
+            if (!/[a-z]/.test(password)) {
+                return 'Password must contain at least one lowercase letter';
+            }
+            
+            if (!/[0-9]/.test(password)) {
+                return 'Password must contain at least one number';
+            }
+            
+            return null;
+        }
+
+        function showError(inputId, errorId, message) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(errorId);
+            
+            input.classList.add('error');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        function clearError(inputId, errorId) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(errorId);
+            
+            input.classList.remove('error');
+            errorDiv.textContent = '';
+            errorDiv.classList.remove('show');
+        }
+
+        // Real-time validation
+        const usernameInput = document.getElementById('username');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        // Restrict username input to allowed characters only
+        usernameInput.addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^a-zA-Z0-9_]/g, '');
+        });
+
+        usernameInput.addEventListener('blur', function() {
+            const error = validateUsername(this.value);
+            if (error) {
+                showError('username', 'usernameError', error);
+            } else {
+                clearError('username', 'usernameError');
+            }
+        });
+
+        emailInput.addEventListener('blur', function() {
+            const error = validateEmail(this.value);
+            if (error) {
+                showError('email', 'emailError', error);
+            } else {
+                clearError('email', 'emailError');
+            }
+        });
+
+        passwordInput.addEventListener('blur', function() {
+            const error = validatePassword(this.value);
+            if (error) {
+                showError('password', 'passwordError', error);
+            } else {
+                clearError('password', 'passwordError');
+            }
+        });
+
+        // Form submission
         document.getElementById('signupForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
+            // Clear previous errors
+            clearError('username', 'usernameError');
+            clearError('email', 'emailError');
+            clearError('password', 'passwordError');
+
             const form = e.target;
-            const formData = new FormData(form);
             const messageDiv = document.getElementById('message');
             const submitBtn = form.querySelector('.submit-btn');
             
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Validate all fields
+            const usernameError = validateUsername(username);
+            const emailError = validateEmail(email);
+            const passwordError = validatePassword(password);
+
+            let hasError = false;
+
+            if (usernameError) {
+                showError('username', 'usernameError', usernameError);
+                hasError = true;
+            }
+
+            if (emailError) {
+                showError('email', 'emailError', emailError);
+                hasError = true;
+            }
+
+            if (passwordError) {
+                showError('password', 'passwordError', passwordError);
+                hasError = true;
+            }
+
+            if (hasError) {
+                messageDiv.textContent = 'Please fix the errors above';
+                messageDiv.className = 'error';
+                return;
+            }
+
             messageDiv.textContent = '';
             messageDiv.className = '';
             submitBtn.disabled = true;
             submitBtn.textContent = 'Creating Account...';
 
             try {
+                const formData = new FormData(form);
+                
                 const response = await fetch('https://vibezone-backend.fly.dev/api/signup/', {
                     method: 'POST',
                     body: formData
