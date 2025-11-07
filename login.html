@@ -509,8 +509,9 @@
 
                 <form id="loginForm">
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Enter your username" required />
+                        <label for="username">Username or Email</label>
+                        <input type="text" id="username" name="username" placeholder="Enter your username or email" required />
+
                     </div>
 
                     <div class="form-group">
@@ -589,9 +590,12 @@
 
             try {
                 const response = await fetch('https://vibezone-backend.fly.dev/api/website-login/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
+                   method: 'POST',
+                   headers: { 'Content-Type': 'application/json' },
+                   body: JSON.stringify({ 
+                       identifier: username,  // <- change here
+                       password 
+                   })
                 });
 
                 const data = await response.json();
