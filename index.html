@@ -313,7 +313,6 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s;
             max-width: 280px;
-            /* Ensure items are same width */
             width: 260px;
         }
 
@@ -322,7 +321,6 @@
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
         }
 
-        /* NEW: unified screenshot container with fixed aspect ratio to keep images consistent */
         .screenshot-placeholder {
             width: 100%;
             border-radius: 16px;
@@ -332,11 +330,9 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            /* 9:16 aspect ratio similar to mobile screens; change if you want a different ratio */
             aspect-ratio: 9 / 16;
         }
 
-        /* If the placeholder should show an emoji when no image available */
         .screenshot-placeholder::before {
             content: '📱';
             font-size: 4rem;
@@ -351,7 +347,7 @@
         .screenshot-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* cover ensures consistent cropping and no empty space */
+            object-fit: cover;
             display: block;
         }
 
@@ -496,8 +492,7 @@
             font-weight: 600;
         }
 
-        .footer-section p,
-        .footer-section a {
+        .footer-section p, .footer-section a {
             color: #cbd5e1;
             font-size: 0.95rem;
             line-height: 2;
@@ -531,7 +526,6 @@
             transform: translateY(-3px);
         }
 
-        /* ensure SVG icons fit and scale */
         .social-links svg {
             width: 20px;
             height: 20px;
@@ -576,9 +570,7 @@
                 justify-content: center;
             }
 
-            .screenshots h2,
-            .features-header h2,
-            .company-info h2 {
+            .screenshots h2, .features-header h2, .company-info h2 {
                 font-size: 2rem;
             }
 
@@ -591,6 +583,7 @@
 </head>
 
 <body>
+
     <!-- HEADER -->
     <header>
         <div class="logo-section">
@@ -617,10 +610,12 @@
                 part of it.</p>
 
             <div class="cta-buttons">
-                <a href="https://github.com/Harikrishnan-TM/vibezone_flutter/releases/download/v1.0.4/app-release.apk"
-                    class="btn btn-primary" download>
+
+                <!-- UPDATED DOWNLOAD BUTTON (FORCED DOWNLOAD) -->
+                <a href="#" class="btn btn-primary" onclick="forceDownload()">
                     📥 Download
                 </a>
+
                 <a href="#features" class="btn btn-secondary">
                     ✨ Explore Features
                 </a>
@@ -632,7 +627,7 @@
         </div>
     </section>
 
-    <!-- APP SCREENSHOTS -->
+    <!-- SCREENSHOTS SECTION -->
     <section class="screenshots" id="screenshots">
         <h2>See Vibzeo in Action</h2>
         <p class="screenshots-subtitle">Discover how easy it is to connect with friends through our beautiful and
@@ -641,46 +636,37 @@
         <div class="screenshot-gallery">
             <div class="screenshot-item">
                 <div class="screenshot-placeholder has-image">
-                    <img src="images/screenshots/Screenshotone.jpg" alt="Voice Calling Interface"
-                        class="screenshot-image" />
+                    <img src="images/screenshots/Screenshotone.jpg" class="screenshot-image" />
                 </div>
-                
             </div>
 
             <div class="screenshot-item">
                 <div class="screenshot-placeholder has-image">
-                    <img src="images/screenshots/appscreenshot.jpg" alt="Voice Calling Interface"
-                        class="screenshot-image" />
+                    <img src="images/screenshots/appscreenshot.jpg" class="screenshot-image" />
                 </div>
-                
             </div>
 
             <div class="screenshot-item">
                 <div class="screenshot-placeholder has-image">
-                    <img src="images/screenshots/Screenshottwo.jpg" alt="Voice Calling Interface"
-                        class="screenshot-image" />
+                    <img src="images/screenshots/Screenshottwo.jpg" class="screenshot-image" />
                 </div>
-               
             </div>
 
             <div class="screenshot-item">
                 <div class="screenshot-placeholder has-image">
-                    <img src="images/screenshots/appscreenshot1.png" alt="Voice Calling Interface"
-                        class="screenshot-image" />
+                    <img src="images/screenshots/appscreenshot1.png" class="screenshot-image" />
                 </div>
-                
             </div>
+
             <div class="screenshot-item">
                 <div class="screenshot-placeholder has-image">
-                    <img src="images/screenshots/Screenshotfive.jpg" alt="Voice Calling Interface"
-                        class="screenshot-image" />
+                    <img src="images/screenshots/Screenshotfive.jpg" class="screenshot-image" />
                 </div>
-                
             </div>
         </div>
     </section>
 
-    <!-- FEATURES -->
+    <!-- FEATURES SECTION -->
     <section class="features" id="features">
         <div class="features-header">
             <h2>Why Choose Vibzeo?</h2>
@@ -728,7 +714,7 @@ Users can collect credits through in-app activities and meaningful engagement.</
         </div>
     </section>
 
-    <!-- COMPANY INFO -->
+    <!-- COMPANY INFO SECTION -->
     <section class="company-info" id="about">
         <h2>About Techzniczone</h2>
         <div class="company-details">
@@ -776,88 +762,10 @@ Users can collect credits through in-app activities and meaningful engagement.</
                 <h3>Connect With Us</h3>
                 <p>Follow us on social media for updates and announcements</p>
                 <div class="social-links">
-                    <a href="#" aria-label="Facebook" title="Facebook">
-                        <!-- Facebook SVG -->
-                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                            <path d="M22.675 0h-21.35C.597 0 0 .597 0 
-                            1.326v21.348C0 23.403.597 24 1.326 
-                            24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 
-                            1.893-4.788 4.659-4.788 1.325 0 2.463.099 
-                            2.795.143v3.24h-1.918c-1.504 
-                            0-1.796.716-1.796 1.765v2.316h3.587l-.467 
-                            3.622h-3.12V24h6.116C23.403 24 24 
-                            23.403 24 22.674V1.326C24 .597 23.403 
-                            0 22.675 0z" />
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="Twitter" title="Twitter (X)">
-                        <!-- Twitter/X SVG -->
-                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                            <path d="M22.46 6.011c.015.205.015.41.015.615 0 
-                            6.27-4.77 13.508-13.508 13.508-2.683 
-                            0-5.176-.786-7.27-2.14.37.045.74.061 
-                            1.123.061 2.218 0 4.257-.753 
-                            5.883-2.02-2.07-.045-3.81-1.402-4.41-3.275.288.045.582.075.882.075.42 
-                            0 .84-.06 1.23-.17-2.16-.435-3.79-2.33-3.79-4.603v-.06c.633.355 
-                            1.358.575 2.134.6-1.26-.84-2.09-2.27-2.09-3.89 
-                            0-.855.228-1.65.62-2.342 2.295 2.82 5.73 4.68 
-                            9.6 4.872-.08-.35-.12-.73-.12-1.11 0-2.69 
-                            2.183-4.873 4.873-4.873 1.4 0 2.667.588 
-                            3.556 1.53 1.11-.215 2.15-.625 3.088-1.185-.365 
-                            1.14-1.14 2.095-2.154 2.7.985-.11 1.93-.38 
-                            2.805-.765-.65.98-1.48 1.84-2.44 2.53z" />
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="Instagram" title="Instagram">
-                        <!-- Instagram SVG -->
-                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                            <path d="M12 2.163c3.204 0 3.584.012 
-                            4.85.07 1.366.062 2.633.334 
-                            3.608 1.31.975.975 1.247 2.242 
-                            1.31 3.608.058 1.266.069 1.646.069 
-                            4.85s-.011 3.584-.069 
-                            4.85c-.063 1.366-.335 2.633-1.31 
-                            3.608-.975.975-2.242 1.247-3.608 
-                            1.31-1.266.058-1.646.069-4.85.069s-3.584-.011-4.85-.069c-1.366-.063-2.633-.335-3.608-1.31-.975-.975-1.247-2.242-1.31-3.608C2.175 
-                            15.584 2.163 15.204 2.163 
-                            12s.012-3.584.07-4.85c.062-1.366.334-2.633 
-                            1.31-3.608.975-.975 2.242-1.247 
-                            3.608-1.31C8.416 2.175 8.796 2.163 12 
-                            2.163zm0 1.684c-3.155 0-3.522.012-4.764.069-1.155.053-1.784.24-2.2.406-.55.213-.944.47-1.36.886-.416.416-.673.81-.886 
-                            1.36-.166.416-.353 1.045-.406 2.2-.057 
-                            1.242-.069 1.609-.069 4.764s.012 3.522.069 
-                            4.764c.053 1.155.24 1.784.406 2.2.213.55.47.944.886 
-                            1.36.416.416.81.673 1.36.886.416.166 
-                            1.045.353 2.2.406 1.242.057 1.609.069 
-                            4.764.069s3.522-.012 
-                            4.764-.069c1.155-.053 1.784-.24 
-                            2.2-.406.55-.213.944-.47 1.36-.886.416-.416.673-.81.886-1.36.166-.416.353-1.045.406-2.2.057-1.242.069-1.609.069-4.764s-.012-3.522-.069-4.764c-.053-1.155-.24-1.784-.406-2.2a3.42 
-                            3.42 0 0 0-.886-1.36 3.42 3.42 0 0 
-                            0-1.36-.886c-.416-.166-1.045-.353-2.2-.406-1.242-.057-1.609-.069-4.764-.069zm0 
-                            3.905a5.952 5.952 0 1 1 0 
-                            11.905 5.952 5.952 0 0 1 0-11.905zm0 
-                            9.834a3.882 3.882 0 1 0 0-7.764 3.882 
-                            3.882 0 0 0 0 7.764zm6.406-10.646a1.44 1.44 0 1 1 0-2.88 1.44 
-                            1.44 0 0 1 0 2.88z" />
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="YouTube" title="YouTube">
-                        <!-- YouTube SVG -->
-                        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                            <path d="M23.498 6.186a2.974 2.974 0 0 
-                            0-2.09-2.106C19.23 3.5 12 
-                            3.5 12 3.5s-7.23 0-9.408.58a2.974 
-                            2.974 0 0 0-2.09 2.106A30.58 30.58 0 0 0 
-                            0 12a30.58 30.58 0 0 0 
-                            .502 5.814 2.974 2.974 0 0 0 2.09 
-                            2.106C4.77 20.5 12 20.5 12 
-                            20.5s7.23 0 9.408-.58a2.974 2.974 0 0 0 
-                            2.09-2.106A30.58 30.58 0 0 0 24 
-                            12a30.58 30.58 0 0 0-.502-5.814zM9.75 
-                            15.02V8.98l6.27 3.02-6.27 
-                            3.02z" />
-                        </svg>
-                    </a>
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 ..."/></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M22.46 6.011c..." /></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M12 2.163c..." /></svg></a>
+                    <a href="#"><svg viewBox="0 0 24 24"><path d="M23.498 6.186..." /></svg></a>
                 </div>
             </div>
         </div>
@@ -867,11 +775,11 @@ Users can collect credits through in-app activities and meaningful engagement.</
                 Karnataka 560102</p>
             <p>© 2025 Techzniczone. All rights reserved. Vibzeo™ is a trademark and product of Techzniczone.</p>
             <p style="margin-top: 10px; font-size: 0.85rem;">This app is currently in Early Access. The official Google Play Store release is coming soon.<br>
-    Download Vibzeo only from our official website <a href="https://vibzeoofficial.in">vibzeoofficial.in</a> — this is the only authorized and verified source during Early Access.<br>
-    Avoid third-party or social media links to prevent installation or account issues.</p>
+            Download Vibzeo only from our official website <a href="https://vibzeoofficial.in">vibzeoofficial.in</a>.</p>
         </div>
     </footer>
 
+    <!-- AUTH + LOGOUT SCRIPT -->
     <script>
         function renderButtons() {
             const token = localStorage.getItem('auth_token');
@@ -880,27 +788,19 @@ Users can collect credits through in-app activities and meaningful engagement.</
             const dashboardLink = document.getElementById('dashboardLink');
 
             if (token) {
-                // Show dashboard link when logged in
-                if (dashboardLink) {
-                    dashboardLink.style.display = 'block';
-                }
+                if (dashboardLink) dashboardLink.style.display = 'block';
 
                 navAuthButtons.innerHTML = `
                     <div class="user-menu">
                         <span>Hi, ${username || 'User'}</span>
                         <button class="btn-logout" onclick="logout()">Logout</button>
-                    </div>
-                `;
+                    </div>`;
             } else {
-                // Hide dashboard link when logged out
-                if (dashboardLink) {
-                    dashboardLink.style.display = 'none';
-                }
+                if (dashboardLink) dashboardLink.style.display = 'none';
 
                 navAuthButtons.innerHTML = `
                     <a href="login.html" class="btn-login">Login</a>
-                    <a href="signup.html" class="btn-signup">Sign Up</a>
-                `;
+                    <a href="signup.html" class="btn-signup">Sign Up</a>`;
             }
         }
 
@@ -908,7 +808,6 @@ Users can collect credits through in-app activities and meaningful engagement.</
             const token = localStorage.getItem('auth_token');
             if (!token) {
                 document.getElementById('logoutMessage').textContent = 'You are not logged in.';
-                document.getElementById('logoutMessage').style.color = '#ef4444';
                 return;
             }
 
@@ -918,34 +817,41 @@ Users can collect credits through in-app activities and meaningful engagement.</
                     headers: { 'Authorization': `Token ${token}` }
                 });
 
-                // Attempt to decode JSON safely
-                let data = {};
-                try {
-                    data = await response.json();
-                } catch (e) {
-                    // ignore JSON parse errors, use generic message below
-                }
-
                 if (response.ok) {
                     localStorage.clear();
-                    document.getElementById('logoutMessage').textContent = '✅ Logged out successfully!';
-                    document.getElementById('logoutMessage').style.color = '#10b981';
+                    document.getElementById('logoutMessage').textContent = 'Logged out!';
                     renderButtons();
-                    setTimeout(() => {
-                        document.getElementById('logoutMessage').textContent = '';
-                    }, 3000);
+                    setTimeout(() => document.getElementById('logoutMessage').textContent = '', 3000);
                 } else {
-                    document.getElementById('logoutMessage').textContent = data.message || 'Logout failed.';
-                    document.getElementById('logoutMessage').style.color = '#ef4444';
+                    document.getElementById('logoutMessage').textContent = 'Logout failed.';
                 }
-            } catch (error) {
-                document.getElementById('logoutMessage').textContent = 'Error: ' + error.message;
-                document.getElementById('logoutMessage').style.color = '#ef4444';
+            } catch (err) {
+                document.getElementById('logoutMessage').textContent = err.message;
             }
         }
 
         renderButtons();
     </script>
-</body>
 
+    <!-- FORCED APK DOWNLOAD SCRIPT -->
+    <script>
+        function forceDownload() {
+            // iOS cannot download APK files
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                alert("iOS devices cannot install APK files. Please use an Android device.");
+                return;
+            }
+
+            const url = "https://github.com/Harikrishnan-TM/vibezone_flutter/releases/download/v1.0.4/app-release.apk";
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "vibzeo.apk";  
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+
+</body>
 </html>
